@@ -954,6 +954,36 @@
     margin-top: 0.3rem;
   }
 
+  .map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    margin: 0.3rem 0.3rem 0.3rem 0;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .map-link:hover {
+    filter: brightness(1.2);
+    border-color: var(--text-muted);
+  }
+
+  .map-link .map-icon { font-size: 1rem; }
+
+  .map-links-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
   .data-item li { margin-bottom: 0.2rem; }
 
   .data-item .capture-method {
@@ -1206,6 +1236,11 @@
   <div class="room-body">
     <p class="core-question">How will we move through, in and out of Newcastle in 2050?</p>
 
+    <div class="map-links-row">
+      <a class="map-link" href="https://craigwrenasmir.github.io/TEDxNewy-Salon-Maps/" target="_blank" style="border-color: var(--transport);"><span class="map-icon">🗺</span> Transport CBD Map</a>
+      <a class="map-link" href="https://craigwrenasmir.github.io/TEDxNewy-Salon-Maps/" target="_blank" style="border-color: var(--transport);"><span class="map-icon">🗺</span> Transport Regional Map</a>
+    </div>
+
     <div class="activity-section">
       <h3><span class="activity-tag tag-build">Build</span> Table Activity</h3>
       <p>Participants collaborate around two large maps, placing 3D transport tokens to indicate where future infrastructure could develop.</p>
@@ -1253,6 +1288,10 @@
   <div class="room-body">
     <p class="core-question">How will we live well in the city in 2050?</p>
 
+    <div class="map-links-row">
+      <a class="map-link" href="https://craigwrenasmir.github.io/TEDxNewy-Salon-Maps/" target="_blank" style="border-color: var(--health);"><span class="map-icon">🗺</span> Health & Wellbeing Map</a>
+    </div>
+
     <div class="activity-section">
       <h3><span class="activity-tag tag-build">Build</span> Table Activity</h3>
       <p>Participants work across themed tables using printed maps, coloured stickers, and investment tokens to explore what supports healthy living and where the city creates friction.</p>
@@ -1298,6 +1337,10 @@
   <div class="collapsible-content">
   <div class="room-body">
     <p class="core-question">How will we experience the city after dark in 2050?</p>
+
+    <div class="map-links-row">
+      <a class="map-link" href="https://craigwrenasmir.github.io/TEDxNewy-Salon-Maps/" target="_blank" style="border-color: var(--night);"><span class="map-icon">🗺</span> Night Culture Map</a>
+    </div>
 
     <div class="activity-section">
       <h3><span class="activity-tag tag-build">Build</span> Table Activity</h3>
