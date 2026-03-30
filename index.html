@@ -1,0 +1,2863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TEDxNewy Salon: Newcastle 2050 – What If? | Planning Hub</title>
+<style>
+  :root {
+    --red: #eb0028;
+    --dark: #1a1a1a;
+    --mid: #2a2a2a;
+    --light: #f5f5f5;
+    --text: #f5f5f5;
+    --text-secondary: #ccc;
+    --text-muted: #aaa;
+    --text-faint: #888;
+    --border: #444;
+    --border-subtle: #333;
+    --card-bg: #1a1a1a;
+    --transport: #3b82f6;
+    --health: #22c55e;
+    --night: #a855f7;
+    --transport-bg: #1e3a5f;
+    --health-bg: #1a3d2a;
+    --night-bg: #2d1b4e;
+  }
+
+  html.light {
+    --dark: #f8f8f8;
+    --mid: #ffffff;
+    --light: #1a1a1a;
+    --text: #1a1a1a;
+    --text-secondary: #333;
+    --text-muted: #666;
+    --text-faint: #999;
+    --border: #ddd;
+    --border-subtle: #e5e5e5;
+    --card-bg: #f0f0f0;
+    --transport-bg: #dbeafe;
+    --health-bg: #dcfce7;
+    --night-bg: #f3e8ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    line-height: 1.6;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  header {
+    background: var(--mid);
+    border-bottom: 3px solid var(--red);
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  header h1 span { color: var(--red); }
+
+  header p {
+    margin-top: 0.5rem;
+    color: var(--text-muted);
+    font-size: 1rem;
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Theme toggle */
+  .theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    background: var(--dark);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    width: 52px;
+    height: 28px;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.3s, border-color 0.3s;
+  }
+
+  .theme-toggle-knob {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    transition: transform 0.3s, background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+  }
+
+  html.light .theme-toggle-knob {
+    transform: translateX(24px);
+  }
+
+  html.light .scaffold-example { background: #e8e8f0; }
+  html.light .data-visual svg rect[fill="#1e293b"],
+  html.light .data-visual svg rect[fill="#1a1a2e"],
+  html.light .data-visual svg rect[fill="#0f0a1e"] { fill: #e2e8f0; }
+  html.light .section-toggle { background: var(--mid); }
+  html.light .asset-group input[type="checkbox"]:checked + label { color: #aaa; }
+  html.light .runsheet-table thead th { background: var(--mid); }
+  html.light .data-filter-btn.active[data-filter="all"] { background: #ccc; color: #333; }
+
+  /* Card Mockups */
+  .card-mockups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-mockup {
+    background: #fff;
+    color: #1a1a1a;
+    border-radius: 8px;
+    padding: 1.5rem;
+    position: relative;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-mockup.card-landscape {
+    grid-column: span 2;
+  }
+
+  .card-mockup .card-room-tab {
+    position: absolute;
+    top: 0;
+    right: 1rem;
+    font-size: 0.55rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #fff;
+    padding: 0.2rem 0.6rem 0.25rem;
+    border-radius: 0 0 4px 4px;
+  }
+
+  .card-room-tab.tab-transport { background: var(--transport); }
+  .card-room-tab.tab-health { background: var(--health); }
+  .card-room-tab.tab-night { background: var(--night); }
+
+  .card-mockup .card-title {
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: 0.15rem;
+    letter-spacing: -0.3px;
+  }
+
+  .card-mockup .card-subtitle {
+    font-size: 0.7rem;
+    color: #888;
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+
+  .card-mockup .card-tedx-logo {
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: #bbb;
+    letter-spacing: 0.5px;
+    position: absolute;
+    bottom: 0.75rem;
+    right: 1rem;
+  }
+
+  .card-mockup .card-tedx-logo span { color: var(--red); }
+
+  .card-field {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .card-field-label {
+    font-weight: 700;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .card-field-line {
+    flex-grow: 1;
+    border-bottom: 1.5px solid #ddd;
+    min-height: 1em;
+    min-width: 40px;
+  }
+
+  .card-field-area {
+    width: 100%;
+    min-height: 2.5rem;
+    border: 1.5px solid #ddd;
+    border-radius: 4px;
+    margin-top: 0.2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .card-field-hint {
+    font-size: 0.65rem;
+    color: #aaa;
+    margin-top: -0.3rem;
+    margin-bottom: 0.5rem;
+    font-style: italic;
+  }
+
+  .card-divider {
+    border: none;
+    border-top: 1px dashed #ddd;
+    margin: 0.6rem 0;
+  }
+
+  .card-checkbox-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.4rem;
+    align-items: center;
+  }
+
+  .card-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.8rem;
+  }
+
+  .card-checkbox .box {
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid #ccc;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* Persona card variants */
+  .card-mockup.persona-card {
+    min-height: 180px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem 2rem;
+  }
+
+  .persona-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .persona-name {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 0.3rem;
+  }
+
+  .persona-desc {
+    font-size: 0.75rem;
+    color: #666;
+    max-width: 220px;
+    margin: 0 auto;
+  }
+
+  /* Legend cards */
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .legend-swatch {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .legend-token-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    background: #f0f0f0;
+  }
+
+  /* Tally sheet grid */
+  .tally-grid {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .tally-grid th, .tally-grid td {
+    border: 1.5px solid #ddd;
+    padding: 0.4rem 0.5rem;
+    text-align: center;
+  }
+
+  .tally-grid th {
+    background: #f5f5f5;
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .tally-grid td { min-height: 1.5rem; }
+
+  /* Allocation board */
+  .alloc-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px dashed #e5e5e5;
+  }
+
+  .alloc-label {
+    font-weight: 700;
+    font-size: 0.8rem;
+    min-width: 120px;
+    flex-shrink: 0;
+  }
+
+  .alloc-slots {
+    display: flex;
+    gap: 0.3rem;
+    flex-grow: 1;
+  }
+
+  .alloc-slot {
+    width: 28px;
+    height: 28px;
+    border: 1.5px dashed #ccc;
+    border-radius: 50%;
+  }
+
+  .card-section-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 700px) {
+    .card-mockup.card-landscape { grid-column: span 1; }
+    .card-mockups-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Collapsible sections */
+  .collapsible {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--mid);
+    border: none;
+    border-radius: 8px 8px 0 0;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: left;
+    transition: background 0.2s;
+    border-bottom: 2px solid var(--red);
+  }
+
+  .section-toggle:hover {
+    filter: brightness(1.1);
+  }
+
+  .section-toggle .chevron {
+    font-size: 1rem;
+    transition: transform 0.3s;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    margin-left: 1rem;
+  }
+
+  .collapsible.collapsed .section-toggle {
+    border-radius: 8px;
+  }
+
+  .collapsible.collapsed .section-toggle .chevron {
+    transform: rotate(-90deg);
+  }
+
+  .collapsible-content {
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    max-height: 5000px;
+    opacity: 1;
+  }
+
+  .collapsible.collapsed .collapsible-content {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  /* Room headers as toggle buttons */
+  .room-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: none;
+    border: none;
+    padding: 1.5rem 2rem;
+    cursor: pointer;
+    color: var(--text);
+    font-family: inherit;
+    text-align: left;
+  }
+
+  .room-toggle h2 { font-size: 1.4rem; pointer-events: none; }
+  .room-toggle .emoji { font-size: 1.8rem; pointer-events: none; }
+  .room-toggle .chevron {
+    margin-left: auto;
+    font-size: 1rem;
+    color: var(--text-muted);
+    transition: transform 0.3s;
+    pointer-events: none;
+  }
+
+  /* Expand/collapse all */
+  .expand-controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: auto;
+  }
+
+  .expand-btn {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .expand-btn:hover {
+    color: var(--text);
+    border-color: var(--text-muted);
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    background: var(--dark);
+    border-bottom: 1px solid var(--border-subtle);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    flex-wrap: wrap;
+    transition: background 0.3s;
+  }
+
+  nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+
+  nav a:hover { background: var(--border-subtle); color: var(--text); }
+  nav a.transport:hover { background: var(--transport-bg); color: var(--transport); }
+  nav a.health:hover { background: var(--health-bg); color: var(--health); }
+  nav a.night:hover { background: var(--night-bg); color: var(--night); }
+
+  main { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+  /* Overview */
+  .overview {
+    background: var(--mid);
+    border-radius: 0 0 8px 8px;
+    padding: 2rem;
+    border-left: 4px solid var(--red);
+  }
+
+  .modes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .mode-card {
+    background: var(--card-bg);
+    border-radius: 6px;
+    padding: 1rem;
+    border: 1px solid var(--border);
+  }
+
+  .mode-card h3 {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .mode-card p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  /* Room sections */
+  .room {
+    margin-bottom: 2.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .room-header {
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .room-header h2 { font-size: 1.4rem; }
+  .room-header .emoji { font-size: 1.8rem; }
+
+  .room.transport .room-header { background: var(--transport-bg); border-left: 4px solid var(--transport); }
+  .room.health .room-header { background: var(--health-bg); border-left: 4px solid var(--health); }
+  .room.night .room-header { background: var(--night-bg); border-left: 4px solid var(--night); }
+
+  .room-body {
+    background: var(--mid);
+    padding: 1.5rem 2rem;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+    max-height: 5000px;
+    opacity: 1;
+  }
+
+  .core-question {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .activity-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .activity-section h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .activity-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    color: #fff;
+  }
+
+  .tag-build { background: #b45309; }
+  .tag-reflect { background: #0369a1; }
+  .tag-debate { background: #9333ea; }
+
+  .activity-section p, .activity-section li {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .activity-section ul {
+    margin-left: 1.2rem;
+    margin-top: 0.3rem;
+  }
+
+  .activity-section li { margin-bottom: 0.25rem; }
+
+  .tables-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 0.75rem;
+  }
+
+  .table-card {
+    background: var(--card-bg);
+    border-radius: 6px;
+    padding: 1rem;
+    border: 1px solid var(--border);
+  }
+
+  .table-card h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .table-card p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .prompt-box {
+    background: var(--card-bg);
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    margin-top: 0.5rem;
+    border: 1px solid var(--border);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--text);
+  }
+
+  /* Facilitator guide */
+  .facilitator {
+    margin-bottom: 3rem;
+  }
+
+  .facilitator h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--red);
+  }
+
+  .facilitator-card {
+    background: var(--mid);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .facilitator-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .facilitator-card ul {
+    margin-left: 1.2rem;
+  }
+
+  .facilitator-card li {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.3rem;
+  }
+
+  /* Assets checklist */
+  .assets {
+    margin-bottom: 3rem;
+  }
+
+  .assets h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--red);
+  }
+
+  .asset-room {
+    background: var(--mid);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .asset-room h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .asset-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+
+  .asset-group h4 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-faint);
+    margin-bottom: 0.5rem;
+  }
+
+  .asset-group ul {
+    list-style: none;
+    margin: 0;
+  }
+
+  .asset-group li {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    padding: 0.2rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .asset-group input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 3px;
+    flex-shrink: 0;
+    cursor: pointer;
+    position: relative;
+    background: transparent;
+    transition: all 0.15s;
+  }
+
+  .asset-group input[type="checkbox"]:checked {
+    background: var(--transport);
+    border-color: var(--transport);
+  }
+
+  .asset-group input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 0.5px;
+    width: 5px;
+    height: 8px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .asset-group label {
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+
+  .asset-group input[type="checkbox"]:checked + label {
+    color: #666;
+    text-decoration: line-through;
+  }
+
+  .room.transport .asset-group input[type="checkbox"] { border-color: var(--transport); }
+  .room.transport .asset-group input[type="checkbox"]:checked { background: var(--transport); border-color: var(--transport); }
+  .room.health .asset-group input[type="checkbox"] { border-color: var(--health); }
+  .room.health .asset-group input[type="checkbox"]:checked { background: var(--health); border-color: var(--health); }
+  .room.night .asset-group input[type="checkbox"] { border-color: var(--night); }
+  .room.night .asset-group input[type="checkbox"]:checked { background: var(--night); border-color: var(--night); }
+
+  .asset-progress {
+    font-size: 0.75rem;
+    color: #666;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .asset-progress-bar {
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+    margin-top: 0.4rem;
+    overflow: hidden;
+  }
+
+  .asset-progress-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.3s;
+    width: 0%;
+  }
+
+  .room.transport .asset-progress-fill { background: var(--transport); }
+  .room.health .asset-progress-fill { background: var(--health); }
+  .room.night .asset-progress-fill { background: var(--night); }
+
+  .firebase-status {
+    text-align: center;
+    font-size: 0.7rem;
+    color: #555;
+    padding: 0.5rem;
+  }
+
+  .firebase-status.connected { color: #22c55e; }
+  .firebase-status.disconnected { color: #ef4444; }
+
+  /* Data Collection */
+  .data-collection { margin-bottom: 3rem; }
+
+  .data-collection h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--red);
+  }
+
+  .data-principles {
+    background: var(--mid);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--red);
+  }
+
+  .data-principles h3 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .data-principles p, .data-principles li {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .data-principles ul {
+    margin-left: 1.2rem;
+    margin-top: 0.4rem;
+  }
+
+  .data-principles li { margin-bottom: 0.3rem; }
+
+  .data-room {
+    background: var(--mid);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .data-room h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .data-item {
+    background: var(--card-bg);
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 1rem;
+  }
+
+  .data-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90px;
+  }
+
+  .data-visual svg {
+    width: 120px;
+    height: auto;
+  }
+
+  .data-content { min-width: 0; }
+
+  .data-item h4 {
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 600px) {
+    .data-item { grid-template-columns: 1fr; }
+    .data-visual { min-height: 60px; }
+    .data-visual svg { width: 100px; }
+  }
+
+  .data-type {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    color: #fff;
+  }
+
+  .type-quant { background: #0369a1; }
+  .type-qual { background: #b45309; }
+  .type-spatial { background: #15803d; }
+  .type-digital { background: #7c3aed; }
+
+  .data-item p, .data-item li {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .data-item ul {
+    margin-left: 1.2rem;
+    margin-top: 0.3rem;
+  }
+
+  .data-item li { margin-bottom: 0.2rem; }
+
+  .data-item .capture-method {
+    font-size: 0.75rem;
+    color: var(--text-faint);
+    margin-top: 0.4rem;
+    padding-top: 0.4rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .data-item .capture-method strong { color: var(--text-muted); }
+
+  .data-item.hidden-by-filter {
+    display: none;
+  }
+
+  .data-filters {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .data-filter-btn {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    color: var(--text-faint);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .data-filter-btn:hover {
+    border-color: #999;
+    color: var(--text-secondary);
+  }
+
+  .data-filter-btn.active {
+    color: #fff;
+  }
+
+  .data-filter-btn.active[data-filter="all"] { border-color: var(--text-muted); background: #444; }
+  .data-filter-btn.active[data-filter="quant"] { border-color: #0369a1; background: #0c4a6e; }
+  .data-filter-btn.active[data-filter="qual"] { border-color: #b45309; background: #78350f; }
+  .data-filter-btn.active[data-filter="spatial"] { border-color: #15803d; background: #14532d; }
+  .data-filter-btn.active[data-filter="digital"] { border-color: #7c3aed; background: #4c1d95; }
+
+  .scaffold-example {
+    background: #1a1a2e;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-family: inherit;
+  }
+
+  .scaffold-example .field {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
+    align-items: baseline;
+  }
+
+  .scaffold-example .field-label {
+    font-weight: 700;
+    color: var(--text-muted);
+    min-width: 90px;
+    flex-shrink: 0;
+    font-size: 0.75rem;
+  }
+
+  .scaffold-example .field-blank {
+    border-bottom: 1px dashed #555;
+    flex-grow: 1;
+    min-height: 1em;
+  }
+
+  .end-of-night {
+    background: var(--mid);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--red);
+  }
+
+  .end-of-night h3 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .end-of-night ol {
+    margin-left: 1.2rem;
+  }
+
+  .end-of-night li {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.3rem;
+  }
+
+  /* Runsheet */
+  .runsheet { margin-bottom: 3rem; }
+
+  .runsheet h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--red);
+  }
+
+  .runsheet-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+
+  .runsheet-table thead th {
+    background: var(--mid);
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    border-bottom: 2px solid var(--red);
+  }
+
+  .runsheet-table tbody tr {
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background 0.15s;
+  }
+
+  .runsheet-table tbody tr:hover { background: var(--card-bg); }
+
+  .runsheet-table td {
+    padding: 0.6rem 0.8rem;
+    vertical-align: top;
+    color: var(--text-secondary);
+  }
+
+  .runsheet-table td:first-child {
+    white-space: nowrap;
+    font-weight: 700;
+    color: var(--light);
+    width: 80px;
+  }
+
+  .runsheet-table td:nth-child(2) {
+    font-weight: 600;
+    color: var(--light);
+    width: 160px;
+  }
+
+  .runsheet-phase {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+  }
+
+  .phase-setup { background: #4a4a00; color: #fbbf24; }
+  .phase-event { background: #1a3d2a; color: #4ade80; }
+  .phase-session { background: #2d1b4e; color: #c084fc; }
+  .phase-close { background: #3b1010; color: #f87171; }
+
+  @media (max-width: 600px) {
+    .tables-grid { grid-template-columns: 1fr; }
+    nav { flex-wrap: wrap; }
+    header h1 { font-size: 1.5rem; }
+    .runsheet-table { font-size: 0.75rem; }
+    .runsheet-table td:nth-child(2) { width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Planning Hub</div>
+  <h1><span>TEDx</span>Newy Salon: Newcastle 2050 – What If?</h1>
+  <p>Room design, facilitator guides, and asset checklists</p>
+  <button class="theme-toggle" id="theme-toggle" title="Toggle light/dark mode">
+    <div class="theme-toggle-knob" id="theme-knob"></div>
+  </button>
+</header>
+
+<nav>
+  <a href="#overview">Overview</a>
+  <a href="#transport" class="transport">Transport</a>
+  <a href="#health" class="health">Health</a>
+  <a href="#nighttime" class="night">Night-Time</a>
+  <a href="#runsheet">Runsheet</a>
+  <a href="#data">Data</a>
+  <a href="#facilitators">Facilitators</a>
+  <a href="#cards">Cards</a>
+  <a href="#assets">Assets</a>
+  <div class="expand-controls">
+    <button class="expand-btn" id="expand-all">Expand all</button>
+    <button class="expand-btn" id="collapse-all">Collapse all</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- OVERVIEW -->
+<div id="overview" class="collapsible">
+  <button class="section-toggle" onclick="toggleSection(this)">Event Overview <span class="chevron">&#9660;</span></button>
+  <div class="collapsible-content">
+    <section class="overview">
+      <p>All rooms invite participants to imagine Newcastle in 2050. Through a mix of digital input, hands-on design, and open discussion, participants will build ideas together.</p>
+      <p style="margin-top:0.75rem;">Three interaction modes run across every room:</p>
+      <div class="modes">
+        <div class="mode-card">
+          <h3>Reflect (Screen Input)</h3>
+          <p>Digital prompts and live audience responses</p>
+        </div>
+        <div class="mode-card">
+          <h3>Build (Table Activity)</h3>
+          <p>Collaborative design using maps, paper and tokens</p>
+        </div>
+        <div class="mode-card">
+          <h3>Debate (Wall Prompt)</h3>
+          <p>Provocative discussion prompts to spark conversation</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- TRANSPORT ROOM -->
+<section id="transport" class="room transport collapsible">
+  <button class="room-toggle room-header" onclick="toggleSection(this.closest('.collapsible'))">
+    <span class="emoji">🚲</span>
+    <h2>Transport Room</h2>
+    <span class="emoji">🚃</span>
+    <span class="chevron">&#9660;</span>
+  </button>
+  <div class="collapsible-content">
+  <div class="room-body">
+    <p class="core-question">How will we move through, in and out of Newcastle in 2050?</p>
+
+    <div class="activity-section">
+      <h3><span class="activity-tag tag-build">Build</span> Table Activity</h3>
+      <p>Participants collaborate around two large maps, placing 3D transport tokens to indicate where future infrastructure could develop.</p>
+      <div class="tables-grid">
+        <div class="table-card">
+          <h4>Table / Map 1 – Newcastle CBD</h4>
+          <p>Movement within the city centre: walking, cycling, light rail, pedestrian zones, accessibility, and the future role of cars.</p>
+        </div>
+        <div class="table-card">
+          <h4>Table / Map 2 – Greater Newcastle</h4>
+          <p>Broader connectivity: light rail expansion, airport links, connections to surrounding areas and the Hunter Valley.</p>
+        </div>
+      </div>
+      <ul style="margin-top:0.75rem;">
+        <li>3D transport tokens: train, light rail, bike, ferry, car, autonomous pod, walking, accessibility hub</li>
+        <li>Sticky dots for priority locations</li>
+        <li>Pins and string for route mapping</li>
+        <li>Structured Transport Change Cards (The change / Where / Who benefits / Why it matters)</li>
+        <li>Encouraged to focus on <strong>three major transport improvements by 2050</strong></li>
+      </ul>
+    </div>
+
+    <div class="activity-section">
+      <h3><span class="activity-tag tag-reflect">Reflect</span> Screen Prompt</h3>
+      <div class="prompt-box">"What would make Newcastle a world-class transport city?"</div>
+    </div>
+
+    <div class="activity-section">
+      <h3><span class="activity-tag tag-debate">Debate</span> Wall Prompt</h3>
+      <div class="prompt-box">"What if Newcastle's CBD had no roads?"</div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- HEALTH & WELLBEING ROOM -->
+<section id="health" class="room health collapsible">
+  <button class="room-toggle room-header" onclick="toggleSection(this.closest('.collapsible'))">
+    <span class="emoji">🌿</span>
+    <h2>Health & Wellbeing Room</h2>
+    <span class="emoji">🏃</span>
+    <span class="chevron">&#9660;</span>
+  </button>
+  <div class="collapsible-content">
+  <div class="room-body">
+    <p class="core-question">How will we live well in the city in 2050?</p>
+
+    <div class="activity-section">
+      <h3><span class="activity-tag tag-build">Build</span> Table Activity</h3>
+      <p>Participants work across themed tables using printed maps, coloured stickers, and investment tokens to explore what supports healthy living and where the city creates friction.</p>
+      <div class="tables-grid">
+        <div class="table-card">
+          <h4>Table 1 – Coast & Nature; Movement & Active Living</h4>
+          <p>Foreshore, Nobbys, Merewether, Glenrock, Blackbutt, cycleways, walking corridors, sport precincts, transport links.</p>
+        </div>
+        <div class="table-card">
+          <h4>Table 2 – Community & Connection; Mental Wellbeing</h4>
+          <p>Library, art gallery, markets, sports clubs, cultural venues, quiet spaces, youth hubs, wellbeing services, supports for people in need.</p>
+        </div>
+      </div>
+      <ul style="margin-top:0.75rem;">
+        <li>Identify places and routes that support wellbeing</li>
+        <li>Use timeline cards to design a "healthy day in Newcastle"</li>
+        <li>Use budget / token allocation cards to prioritise investments</li>
+        <li>Investments: green space, active transport, community hubs, youth mental health support</li>
+      </ul>
+    </div>
+
+    <div class="activity-section">
+      <h3><span class="activity-tag tag-reflect">Reflect</span> Screen Prompt</h3>
+      <div class="prompt-box">"What place in Newcastle makes you feel well, and why?"</div>
+    </div>
+
+    <div class="activity-section">
+      <h3><span class="activity-tag tag-debate">Debate</span> Wall Prompt</h3>
+      <div class="prompt-box">"Is wellbeing a personal responsibility, or something a city should help design?"</div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- NIGHT-TIME ROOM -->
+<section id="nighttime" class="room night collapsible">
+  <button class="room-toggle room-header" onclick="toggleSection(this.closest('.collapsible'))">
+    <span class="emoji">🪩</span>
+    <h2>Night-Time Culture & Economy Room</h2>
+    <span class="emoji">🎸</span>
+    <span class="chevron">&#9660;</span>
+  </button>
+  <div class="collapsible-content">
+  <div class="room-body">
+    <p class="core-question">How will we experience the city after dark in 2050?</p>
+
+    <div class="activity-section">
+      <h3><span class="activity-tag tag-build">Build</span> Table Activity</h3>
+      <p>Maps of the city on tables with different prompts. Participants design night-time experiences and map the city's after-dark landscape.</p>
+      <div class="tables-grid">
+        <div class="table-card">
+          <h4>Table 1 – Persona Night Design</h4>
+          <p>Each group receives a persona card (uni student, shift worker, 17-year-old, non-drinker, older resident, disabled patron, parent seeking culture after 8pm) and designs their night-time experience: where they go, how they travel, what they do, barriers, and what makes it feel safe and memorable.</p>
+        </div>
+        <div class="table-card">
+          <h4>Table 2 – Glow Map</h4>
+          <p>Shared map where participants place stickers showing: best places at night, places people avoid, and places with potential. Document favourite night-time moments and consider whether those spaces still exist.</p>
+        </div>
+      </div>
+      <ul style="margin-top:0.75rem;">
+        <li>Persona cards for night experience design</li>
+        <li>Prompt cards: where, how, what, barriers, improvements</li>
+        <li>Memory cards for "best night in Newcastle"</li>
+        <li>Glow stickers (colour-coded: best / avoid / potential)</li>
+      </ul>
+    </div>
+
+    <div class="activity-section">
+      <h3><span class="activity-tag tag-reflect">Reflect</span> Screen Prompt</h3>
+      <div class="prompt-box">"What night experience should Newcastle have by 2050?"</div>
+    </div>
+
+    <div class="activity-section">
+      <h3><span class="activity-tag tag-debate">Debate</span> Wall Prompt</h3>
+      <div class="prompt-box">"Who is Newcastle's night currently designed for, and who is left out?"</div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- RUNSHEET -->
+<div id="runsheet" class="collapsible">
+  <button class="section-toggle" onclick="toggleSection(this)">Event Runsheet <span class="chevron">&#9660;</span></button>
+  <div class="collapsible-content">
+  <section class="runsheet">
+  <table class="runsheet-table">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Activity</th>
+        <th>Details</th>
+        <th>Lead</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>3:00 pm</td>
+        <td>Venue Access & Initial Setup <span class="runsheet-phase phase-setup">Setup</span></td>
+        <td>Core team arrives. Room layout, signage, registration desk (guest list, check-in, lanyards and wristbands), stage preparation.</td>
+        <td>Adventures Team</td>
+      </tr>
+      <tr>
+        <td>3:30 pm</td>
+        <td>Technical Setup & Room Set-Up <span class="runsheet-phase phase-setup">Setup</span></td>
+        <td>AV testing, microphones, slides, lighting checks, clickers, stage positions, recordings, decorations, music.</td>
+        <td>Adventures Team + Will</td>
+      </tr>
+      <tr>
+        <td>4:15 pm</td>
+        <td>Runthrough <span class="runsheet-phase phase-setup">Setup</span></td>
+        <td>Confirm speaker order, timing cues, stage positions, effects and run-through of transitions.</td>
+        <td>Adventures + Will</td>
+      </tr>
+      <tr>
+        <td>5:00 pm</td>
+        <td>Volunteers & Co-Facilitators Arrive <span class="runsheet-phase phase-setup">Setup</span></td>
+        <td>Welcome, speaker mic checks, slide confirmation, timing reminders.</td>
+        <td>Adventures + Jake + Will</td>
+      </tr>
+      <tr>
+        <td>5:15 pm</td>
+        <td>Team Briefing <span class="runsheet-phase phase-setup">Setup</span></td>
+        <td>Full team briefing: event flow, roles, emergency procedures, timekeeping, audience management.</td>
+        <td>Adventures + Jake + Will</td>
+      </tr>
+      <tr>
+        <td>5:30 pm</td>
+        <td>Catering <span class="runsheet-phase phase-setup">Setup</span></td>
+        <td>Catering arrives, set-up ready for event.</td>
+        <td>Adventures + Volunteers</td>
+      </tr>
+      <tr>
+        <td>5:45 pm</td>
+        <td>Final Venue Reset <span class="runsheet-phase phase-setup">Setup</span></td>
+        <td>Final tech check, lights, stage readiness, doors prep.</td>
+        <td>All Teams</td>
+      </tr>
+      <tr style="border-top: 2px solid var(--red);">
+        <td>6:00 pm</td>
+        <td>Doors Open <span class="runsheet-phase phase-event">Event</span></td>
+        <td>Guests arrive and check-in. Background music and informal networking.</td>
+        <td>Volunteers (Reggo + F&B)</td>
+      </tr>
+      <tr>
+        <td>6:30 pm</td>
+        <td>Welcome & Intro <span class="runsheet-phase phase-event">Event</span></td>
+        <td>Introduction to TEDxNewy 2026.</td>
+        <td>Jake + Will</td>
+      </tr>
+      <tr>
+        <td>6:35 pm</td>
+        <td>Format Overview <span class="runsheet-phase phase-event">Event</span></td>
+        <td>Explain the format for the evening and expectations for sessions.</td>
+        <td>Adventures</td>
+      </tr>
+      <tr>
+        <td>6:40 pm</td>
+        <td>Lead up to Breakout Rooms <span class="runsheet-phase phase-event">Event</span></td>
+        <td>Guide guests up to rooms according to wristbands in elevators.</td>
+        <td>Volunteers</td>
+      </tr>
+      <tr style="border-top: 2px solid var(--night);">
+        <td>6:45 pm</td>
+        <td>Session 1 <span class="runsheet-phase phase-session">Session</span></td>
+        <td>Q210 — Transport &nbsp;|&nbsp; Q212 — Health & Wellbeing &nbsp;|&nbsp; Q208 Studio — Night-Time Economy<br>Volunteers clean & reset ground floor; assist upstairs. Digi Newy + Marketing take photos/video.</td>
+        <td>Adventures + UON SMEs</td>
+      </tr>
+      <tr>
+        <td>7:10 pm</td>
+        <td>Break 1 <span class="runsheet-phase phase-session">Session</span></td>
+        <td>Volunteers + Adventures strategically capture data from rooms (store and take photos) before resetting for next crew. Short refreshment/networking break.</td>
+        <td>Adventures + Volunteers + UON SMEs</td>
+      </tr>
+      <tr>
+        <td>7:15 pm</td>
+        <td>Session 2 <span class="runsheet-phase phase-session">Session</span></td>
+        <td>Same as Session 1 — rooms rotate with new participants.</td>
+        <td>Adventures + UON SMEs</td>
+      </tr>
+      <tr>
+        <td>7:40 pm</td>
+        <td>Break 2 <span class="runsheet-phase phase-session">Session</span></td>
+        <td>Data capture, room reset, refreshment/networking break.</td>
+        <td>Adventures + Volunteers + UON SMEs</td>
+      </tr>
+      <tr>
+        <td>7:45 pm</td>
+        <td>Session 3 <span class="runsheet-phase phase-session">Session</span></td>
+        <td>Same as Session 1 — final rotation.</td>
+        <td>Adventures + UON SMEs</td>
+      </tr>
+      <tr>
+        <td>8:10 pm</td>
+        <td>Data Capture Window <span class="runsheet-phase phase-session">Session</span></td>
+        <td>One person per room does a 5-minute circuit: stack and photograph overlays, photograph wall prompts, collect card envelopes and tally sheets. Guests guided downstairs during this window.</td>
+        <td>Adventures (1 per room)</td>
+      </tr>
+      <tr style="border-top: 2px solid var(--red);">
+        <td>8:15 pm</td>
+        <td>Closing Remarks <span class="runsheet-phase phase-close">Close</span></td>
+        <td>Bring all guests together — thanks, reflections, summing up. (Decide: upstairs or downstairs?)</td>
+        <td>Jake + Will + Adventures</td>
+      </tr>
+      <tr>
+        <td>8:20 pm</td>
+        <td>Informal Networking <span class="runsheet-phase phase-close">Close</span></td>
+        <td>Guests connect and wrap up conversations.</td>
+        <td>All</td>
+      </tr>
+      <tr>
+        <td>9:00 pm</td>
+        <td>Hard Close <span class="runsheet-phase phase-close">Close</span></td>
+        <td>Event officially concludes. Guests exit and pack-down begins.</td>
+        <td>Volunteers + Adventures</td>
+      </tr>
+    </tbody>
+  </table>
+  </section>
+  </div>
+</div>
+
+<!-- DATA COLLECTION -->
+<div id="data" class="collapsible collapsed">
+  <button class="section-toggle" onclick="toggleSection(this)">Data Collection Strategy <span class="chevron">&#9660;</span></button>
+  <div class="collapsible-content">
+  <section class="data-collection">
+
+  <div class="data-principles">
+    <h3>Design Principles</h3>
+    <p>With ~70 participants across 3 rooms and 3 rotations (~23 per room per session), and a small team managing changeovers, data capture must be built into the activities themselves — not bolted on as an extra task.</p>
+    <ul>
+      <li><strong>The activity IS the data.</strong> Participants create the data artefact by doing the task. Stickers on overlays, filled-in cards, screen responses — these are the outputs. No one needs to separately transcribe or record.</li>
+      <li><strong>Clear overlay sheets on all maps.</strong> Each session gets a fresh acetate/transparency sheet over the base map. Participants place stickers on the overlay, not the map. Between sessions, label the sheet (Room + Session #), set it aside, lay a fresh one down. At the end of the night, stack all three overlays to see where consensus clusters. No photos needed between sessions.</li>
+      <li><strong>Structured response cards over sticky notes.</strong> Free-form sticky notes from 9 table-sessions are hard to analyse. Pre-printed cards with scaffolded fields give you consistent, comparable data across all groups.</li>
+      <li><strong>Screen prompts = free digital data.</strong> Anything collected via Mentimeter/Slido is automatically captured, timestamped, and exportable. Use 2 prompts per room: one quantitative (poll/ranking) and one qualitative (open text). This is your cleanest data source.</li>
+      <li><strong>One end-of-night photo circuit.</strong> After the final session, one person photographs: overlay stacks (layered and individual), wall prompts, and any remaining table artefacts. Everything else is already collected in labelled envelopes.</li>
+    </ul>
+  </div>
+
+  <!-- TRANSPORT DATA -->
+  <div class="data-room" style="border-left: 3px solid var(--transport);">
+    <h3 style="color: var(--transport);">Transport Room — Data Collection</h3>
+    <div class="data-filters">
+      <button class="data-filter-btn active" data-filter="all">All</button>
+      <button class="data-filter-btn" data-filter="quant">Quantitative</button>
+      <button class="data-filter-btn" data-filter="qual">Qualitative</button>
+      <button class="data-filter-btn" data-filter="spatial">Spatial</button>
+      <button class="data-filter-btn" data-filter="digital">Digital</button>
+    </div>
+
+    <div class="data-item" data-types="quant digital">
+      <div class="data-visual">
+        <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="10" width="104" height="70" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+          <rect x="22" y="52" width="14" height="20" rx="2" fill="#3b82f6" opacity="0.9"/>
+          <rect x="40" y="38" width="14" height="34" rx="2" fill="#3b82f6" opacity="0.7"/>
+          <rect x="58" y="45" width="14" height="27" rx="2" fill="#3b82f6" opacity="0.55"/>
+          <rect x="76" y="56" width="14" height="16" rx="2" fill="#3b82f6" opacity="0.4"/>
+          <text x="60" y="26" text-anchor="middle" fill="#64748b" font-size="7" font-family="sans-serif">Top 3 priorities?</text>
+          <circle cx="100" cy="18" r="4" fill="#3b82f6" opacity="0.3"/>
+          <circle cx="100" cy="18" r="2" fill="#3b82f6"/>
+        </svg>
+      </div>
+      <div class="data-content">
+        <h4>Transport Priority Ranking <span class="data-type type-quant">Quantitative</span> <span class="data-type type-digital">Digital</span></h4>
+        <p>Screen poll: "Rank your top 3 transport priorities for Newcastle 2050" — forced choice from a set list (e.g. light rail expansion, cycling network, airport link, pedestrian CBD, autonomous transit, ferry services, regional rail, accessibility upgrades). Gives you a clean bar chart of what matters most.</p>
+        <p class="capture-method"><strong>Capture:</strong> Auto-captured via Mentimeter/Slido. Run once per session (3 datasets).</p>
+      </div>
+    </div>
+
+    <div class="data-item" data-types="qual digital">
+      <div class="data-visual">
+        <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="10" width="104" height="70" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="28" y="38" fill="#94a3b8" font-size="8" font-family="sans-serif">transport</text>
+          <text x="44" y="50" fill="#60a5fa" font-size="13" font-weight="bold" font-family="sans-serif">city</text>
+          <text x="18" y="55" fill="#94a3b8" font-size="6" font-family="sans-serif">cycling</text>
+          <text x="68" y="42" fill="#7dd3fc" font-size="10" font-family="sans-serif">connect</text>
+          <text x="22" y="68" fill="#7dd3fc" font-size="9" font-family="sans-serif">access</text>
+          <text x="62" y="65" fill="#94a3b8" font-size="7" font-family="sans-serif">rail</text>
+          <text x="78" y="55" fill="#94a3b8" font-size="6" font-family="sans-serif">walk</text>
+          <text x="38" y="28" fill="#7dd3fc" font-size="7" font-family="sans-serif">innovate</text>
+          <text x="82" y="72" fill="#94a3b8" font-size="5" font-family="sans-serif">future</text>
+        </svg>
+      </div>
+      <div class="data-content">
+        <h4>Open Screen Prompt <span class="data-type type-qual">Qualitative</span> <span class="data-type type-digital">Digital</span></h4>
+        <p>"What would make Newcastle a world-class transport city?" — open text responses on screen.</p>
+        <p class="capture-method"><strong>Capture:</strong> Auto-captured. Exportable word cloud + raw responses.</p>
+      </div>
+    </div>
+
+    <div class="data-item" data-types="spatial">
+      <div class="data-visual">
+        <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- base map -->
+          <rect x="10" y="20" width="80" height="55" rx="3" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+          <!-- map grid lines -->
+          <line x1="10" y1="38" x2="90" y2="38" stroke="#1e3a5f" stroke-width="0.5"/>
+          <line x1="10" y1="55" x2="90" y2="55" stroke="#1e3a5f" stroke-width="0.5"/>
+          <line x1="37" y1="20" x2="37" y2="75" stroke="#1e3a5f" stroke-width="0.5"/>
+          <line x1="63" y1="20" x2="63" y2="75" stroke="#1e3a5f" stroke-width="0.5"/>
+          <!-- overlay sheet 1 -->
+          <rect x="16" y="16" width="80" height="55" rx="3" fill="none" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3 2" opacity="0.4"/>
+          <!-- overlay sheet 2 -->
+          <rect x="22" y="12" width="80" height="55" rx="3" fill="none" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3 2" opacity="0.6"/>
+          <!-- overlay sheet 3 (top) -->
+          <rect x="28" y="8" width="80" height="55" rx="3" fill="none" stroke="#3b82f6" stroke-width="1.5" opacity="0.9"/>
+          <!-- dots across layers -->
+          <circle cx="45" cy="35" r="3" fill="#3b82f6" opacity="0.8"/>
+          <circle cx="52" cy="33" r="3" fill="#3b82f6" opacity="0.5"/>
+          <circle cx="48" cy="38" r="3" fill="#3b82f6" opacity="0.3"/>
+          <circle cx="70" cy="45" r="3" fill="#60a5fa" opacity="0.7"/>
+          <circle cx="65" cy="48" r="3" fill="#60a5fa" opacity="0.4"/>
+          <circle cx="38" cy="52" r="3" fill="#93c5fd" opacity="0.6"/>
+          <!-- label -->
+          <text x="60" y="82" text-anchor="middle" fill="#64748b" font-size="6" font-family="sans-serif">3 overlays = composite heatmap</text>
+        </svg>
+      </div>
+      <div class="data-content">
+        <h4>Infrastructure Heatmaps <span class="data-type type-spatial">Spatial</span></h4>
+        <p>Both maps (CBD + Greater Newcastle) get a clear overlay per session. Participants place coloured dot stickers to mark where infrastructure should go. Use a simple colour code: one colour for "priority location", another for "connection point".</p>
+        <p>3D tokens (train, light rail, bike, etc.) are used as discussion tools during the activity. When a group agrees on a placement, they mark it with a sticker on the overlay — the sticker is the data, the token is the conversation starter.</p>
+        <p class="capture-method"><strong>Capture:</strong> 2 maps × 3 sessions = 6 labelled overlay sheets. Stack at end of night for composite heatmap. Photograph stacked and individual.</p>
+      </div>
+    </div>
+
+    <div class="data-item" data-types="spatial qual">
+      <div class="data-visual">
+        <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- map bg -->
+          <rect x="10" y="10" width="100" height="65" rx="3" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+          <!-- route lines -->
+          <circle cx="30" cy="30" r="4" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+          <circle cx="75" cy="25" r="4" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+          <circle cx="55" cy="55" r="4" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+          <circle cx="90" cy="50" r="4" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+          <line x1="34" y1="30" x2="71" y2="25" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="4 2"/>
+          <line x1="75" y1="29" x2="58" y2="52" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="4 2"/>
+          <line x1="59" y1="55" x2="86" y2="50" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="4 2"/>
+          <line x1="33" y1="33" x2="52" y2="52" stroke="#60a5fa" stroke-width="1" stroke-dasharray="4 2" opacity="0.5"/>
+          <!-- pin markers -->
+          <circle cx="30" cy="30" r="2" fill="#3b82f6"/>
+          <circle cx="75" cy="25" r="2" fill="#3b82f6"/>
+          <circle cx="55" cy="55" r="2" fill="#3b82f6"/>
+          <circle cx="90" cy="50" r="2" fill="#3b82f6"/>
+          <!-- camera icon -->
+          <rect x="78" y="62" width="18" height="12" rx="2" fill="#475569"/>
+          <circle cx="87" cy="68" r="3.5" fill="none" stroke="#94a3b8" stroke-width="1"/>
+          <rect x="83" y="61" width="8" height="3" rx="1" fill="#475569"/>
+          <text x="55" y="84" text-anchor="middle" fill="#64748b" font-size="6" font-family="sans-serif">photo each session</text>
+        </svg>
+      </div>
+      <div class="data-content">
+        <h4>Route Mapping <span class="data-type type-spatial">Spatial</span> <span class="data-type type-qual">Qualitative</span></h4>
+        <p>Pins and string on the base map for desired routes and connections. Since these can't go on an overlay, photograph each table's route layout at the end of each session (3 photos per map = 6 total). Facilitator can quickly snap these during the 5-minute changeover.</p>
+        <p class="capture-method"><strong>Capture:</strong> Quick photo at end of each session before string is reset. Label photos.</p>
+      </div>
+    </div>
+
+    <div class="data-item" data-types="qual">
+      <div class="data-visual">
+        <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- card shape -->
+          <rect x="15" y="10" width="90" height="70" rx="4" fill="#1e293b" stroke="#b45309" stroke-width="1.5"/>
+          <!-- field lines -->
+          <text x="23" y="26" fill="#b45309" font-size="6" font-weight="bold" font-family="sans-serif">The change:</text>
+          <line x1="60" y1="24" x2="97" y2="24" stroke="#334155" stroke-width="1"/>
+          <text x="23" y="40" fill="#b45309" font-size="6" font-weight="bold" font-family="sans-serif">Where:</text>
+          <line x1="48" y1="38" x2="97" y2="38" stroke="#334155" stroke-width="1"/>
+          <text x="23" y="54" fill="#b45309" font-size="6" font-weight="bold" font-family="sans-serif">Who benefits:</text>
+          <line x1="65" y1="52" x2="97" y2="52" stroke="#334155" stroke-width="1"/>
+          <text x="23" y="68" fill="#b45309" font-size="6" font-weight="bold" font-family="sans-serif">Why it matters:</text>
+          <line x1="68" y1="66" x2="97" y2="66" stroke="#334155" stroke-width="1"/>
+          <!-- pencil -->
+          <line x1="88" y1="72" x2="98" y2="62" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/>
+          <polygon points="87,74 89,73 88,71" fill="#94a3b8"/>
+        </svg>
+      </div>
+      <div class="data-content">
+        <h4>Transport Change Cards <span class="data-type type-qual">Qualitative</span></h4>
+        <p>Structured card replaces free-form comment cards. Each participant (or pair) fills one in during the table activity.</p>
+        <div class="scaffold-example">
+          <div class="field"><span class="field-label">The change:</span><span class="field-blank"></span></div>
+          <div class="field"><span class="field-label">Where:</span><span class="field-blank"></span></div>
+          <div class="field"><span class="field-label">Who benefits:</span><span class="field-blank"></span></div>
+          <div class="field"><span class="field-label">Why it matters:</span><span class="field-blank"></span></div>
+        </div>
+        <p class="capture-method"><strong>Capture:</strong> Cards collected into a labelled envelope per session. ~20–25 cards per session.</p>
+      </div>
+    </div>
+
+    <div class="data-item" data-types="qual">
+      <div class="data-visual">
+        <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- whiteboard -->
+          <rect x="10" y="8" width="100" height="70" rx="3" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+          <!-- sticky notes scattered -->
+          <rect x="16" y="14" width="22" height="18" rx="1" fill="#fbbf24" opacity="0.8" transform="rotate(-2 27 23)"/>
+          <rect x="42" y="16" width="22" height="18" rx="1" fill="#fbbf24" opacity="0.7" transform="rotate(1 53 25)"/>
+          <rect x="68" y="13" width="22" height="18" rx="1" fill="#fbbf24" opacity="0.8" transform="rotate(-1 79 22)"/>
+          <rect x="20" y="38" width="22" height="18" rx="1" fill="#fbbf24" opacity="0.6" transform="rotate(2 31 47)"/>
+          <rect x="48" y="40" width="22" height="18" rx="1" fill="#fbbf24" opacity="0.7" transform="rotate(-1 59 49)"/>
+          <rect x="74" y="37" width="22" height="18" rx="1" fill="#fbbf24" opacity="0.5" transform="rotate(1 85 46)"/>
+          <rect x="34" y="58" width="22" height="18" rx="1" fill="#fbbf24" opacity="0.4" transform="rotate(-2 45 67)"/>
+          <rect x="60" y="60" width="22" height="18" rx="1" fill="#fbbf24" opacity="0.3"/>
+          <!-- tiny writing lines on notes -->
+          <line x1="19" y1="19" x2="33" y2="19" stroke="#92400e" stroke-width="0.5" opacity="0.5"/>
+          <line x1="19" y1="23" x2="30" y2="23" stroke="#92400e" stroke-width="0.5" opacity="0.5"/>
+          <line x1="45" y1="21" x2="59" y2="21" stroke="#92400e" stroke-width="0.5" opacity="0.5"/>
+          <line x1="45" y1="25" x2="56" y2="25" stroke="#92400e" stroke-width="0.5" opacity="0.5"/>
+          <text x="60" y="87" text-anchor="middle" fill="#64748b" font-size="6" font-family="sans-serif">accumulates all night</text>
+        </svg>
+      </div>
+      <div class="data-content">
+        <h4>Wall Debate <span class="data-type type-qual">Qualitative</span></h4>
+        <p>"What if Newcastle's CBD had no roads?" — responses on sticky notes, accumulate across all 3 sessions.</p>
+        <p class="capture-method"><strong>Capture:</strong> Leave in place all night. One photo at end of night.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEALTH DATA -->
+  <div class="data-room" style="border-left: 3px solid var(--health);">
+    <h3 style="color: var(--health);">Health & Wellbeing Room — Data Collection</h3>
+    <div class="data-filters">
+      <button class="data-filter-btn active" data-filter="all">All</button>
+      <button class="data-filter-btn" data-filter="quant">Quantitative</button>
+      <button class="data-filter-btn" data-filter="qual">Qualitative</button>
+      <button class="data-filter-btn" data-filter="spatial">Spatial</button>
+      <button class="data-filter-btn" data-filter="digital">Digital</button>
+    </div>
+
+    <div class="data-item" data-types="quant">
+      <div class="data-visual">
+        <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- allocation board -->
+          <rect x="10" y="10" width="100" height="70" rx="4" fill="#1e293b" stroke="#22c55e" stroke-width="1"/>
+          <!-- category labels -->
+          <text x="16" y="24" fill="#4ade80" font-size="5" font-family="sans-serif">Green space</text>
+          <text x="16" y="36" fill="#4ade80" font-size="5" font-family="sans-serif">Transport</text>
+          <text x="16" y="48" fill="#4ade80" font-size="5" font-family="sans-serif">Community</text>
+          <text x="16" y="60" fill="#4ade80" font-size="5" font-family="sans-serif">Youth MH</text>
+          <text x="16" y="72" fill="#4ade80" font-size="5" font-family="sans-serif">Wellbeing</text>
+          <!-- tokens (circles) placed -->
+          <circle cx="58" cy="22" r="3.5" fill="#22c55e" opacity="0.8"/><circle cx="66" cy="22" r="3.5" fill="#22c55e" opacity="0.6"/><circle cx="74" cy="22" r="3.5" fill="#22c55e" opacity="0.5"/><circle cx="82" cy="22" r="3.5" fill="#22c55e" opacity="0.4"/><circle cx="90" cy="22" r="3.5" fill="#22c55e" opacity="0.3"/>
+          <circle cx="58" cy="34" r="3.5" fill="#22c55e" opacity="0.8"/><circle cx="66" cy="34" r="3.5" fill="#22c55e" opacity="0.6"/><circle cx="74" cy="34" r="3.5" fill="#22c55e" opacity="0.4"/>
+          <circle cx="58" cy="46" r="3.5" fill="#22c55e" opacity="0.8"/><circle cx="66" cy="46" r="3.5" fill="#22c55e" opacity="0.5"/><circle cx="74" cy="46" r="3.5" fill="#22c55e" opacity="0.4"/><circle cx="82" cy="46" r="3.5" fill="#22c55e" opacity="0.3"/>
+          <circle cx="58" cy="58" r="3.5" fill="#22c55e" opacity="0.8"/><circle cx="66" cy="58" r="3.5" fill="#22c55e" opacity="0.5"/>
+          <circle cx="58" cy="70" r="3.5" fill="#22c55e" opacity="0.8"/>
+        </svg>
+      </div>
+      <div class="data-content">
+        <h4>Investment Token Allocation <span class="data-type type-quant">Quantitative</span></h4>
+        <p>Each table gets a set number of tokens and a printed allocation board with categories (green space, active transport, community hubs, youth mental health, quiet/rest spaces, wellbeing services). Groups distribute tokens across categories. A simple tally sheet at each table records the count.</p>
+        <p>With 2 tables × 3 sessions = 6 tally sheets, you get a clear picture of where people want investment, and can compare across sessions.</p>
+        <p class="capture-method"><strong>Capture:</strong> Facilitator or table volunteer counts tokens and marks the pre-printed tally sheet before sweeping tokens back for the next group. ~30 seconds per table.</p>
+      </div>
+    </div>
+
+    <div class="data-item" data-types="quant digital">
+      <div class="data-visual">
+        <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="10" width="104" height="70" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="1.5"/>
+          <!-- map outline abstracted -->
+          <path d="M25 35 Q40 28 55 32 Q65 35 72 30 Q82 25 92 33 L92 58 Q80 62 70 56 Q60 50 48 55 Q38 60 25 55 Z" fill="#1a3d2a" opacity="0.5" stroke="#22c55e" stroke-width="0.5"/>
+          <!-- pin markers -->
+          <circle cx="38" cy="40" r="4" fill="#22c55e" opacity="0.8"/>
+          <circle cx="55" cy="38" r="5" fill="#22c55e" opacity="0.6"/>
+          <circle cx="72" cy="35" r="6" fill="#22c55e" opacity="0.5"/>
+          <circle cx="62" cy="50" r="3" fill="#22c55e" opacity="0.4"/>
+          <circle cx="82" cy="42" r="4" fill="#22c55e" opacity="0.7"/>
+          <text x="58" y="24" text-anchor="middle" fill="#64748b" font-size="6" font-family="sans-serif">Where do you feel well?</text>
+          <text x="58" y="76" text-anchor="middle" fill="#64748b" font-size="6" font-family="sans-serif">precinct poll</text>
+        </svg>
+      </div>
+      <div class="data-content">
+        <h4>Where Novocastrians Feel Well <span class="data-type type-quant">Quantitative</span> <span class="data-type type-digital">Digital</span></h4>
+        <p>Screen poll: "Where in Newcastle do you feel well?" — multiple choice from a list of precincts/areas (Foreshore, Merewether, Blackbutt, Darby St, Honeysuckle, Civic Park, etc.) plus an "Other" free-text option. Gives you a countable precinct ranking AND qualitative colour from the "Other" responses.</p>
+        <p class="capture-method"><strong>Capture:</strong> Auto-captured via Mentimeter/Slido. Run once per session.</p>
+      </div>
+    </div>
+
+    <div class="data-item" data-types="qual digital">
+      <div class="data-visual">
+        <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="10" width="104" height="70" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="20" y="36" fill="#86efac" font-size="8" font-family="sans-serif">nature</text>
+          <text x="50" y="48" fill="#4ade80" font-size="12" font-weight="bold" font-family="sans-serif">well</text>
+          <text x="22" y="54" fill="#86efac" font-size="6" font-family="sans-serif">beach</text>
+          <text x="62" y="36" fill="#86efac" font-size="9" font-family="sans-serif">peace</text>
+          <text x="30" y="66" fill="#86efac" font-size="7" font-family="sans-serif">green</text>
+          <text x="68" y="62" fill="#86efac" font-size="6" font-family="sans-serif">walk</text>
+          <text x="78" y="50" fill="#86efac" font-size="5" font-family="sans-serif">ocean</text>
+          <text x="18" y="26" fill="#86efac" font-size="6" font-family="sans-serif">community</text>
+          <text x="70" y="26" fill="#86efac" font-size="7" font-family="sans-serif">safe</text>
+          <text x="62" y="72" fill="#86efac" font-size="5" font-family="sans-serif">connect</text>
+        </svg>
+      </div>
+      <div class="data-content">
+        <h4>Open Screen Prompt <span class="data-type type-qual">Qualitative</span> <span class="data-type type-digital">Digital</span></h4>
+        <p>"What place in Newcastle makes you feel well, and why?" — open text. This is the qualitative companion to the poll above.</p>
+        <p class="capture-method"><strong>Capture:</strong> Auto-captured. Can be presented as a word cloud in real-time.</p>
+      </div>
+    </div>
+
+    <div class="data-item" data-types="spatial">
+      <div class="data-visual">
+        <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- base map -->
+          <rect x="10" y="20" width="80" height="55" rx="3" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+          <line x1="10" y1="38" x2="90" y2="38" stroke="#1a3d2a" stroke-width="0.5"/>
+          <line x1="10" y1="55" x2="90" y2="55" stroke="#1a3d2a" stroke-width="0.5"/>
+          <line x1="37" y1="20" x2="37" y2="75" stroke="#1a3d2a" stroke-width="0.5"/>
+          <line x1="63" y1="20" x2="63" y2="75" stroke="#1a3d2a" stroke-width="0.5"/>
+          <!-- overlay stacked -->
+          <rect x="16" y="16" width="80" height="55" rx="3" fill="none" stroke="#22c55e" stroke-width="1" stroke-dasharray="3 2" opacity="0.4"/>
+          <rect x="22" y="12" width="80" height="55" rx="3" fill="none" stroke="#22c55e" stroke-width="1" stroke-dasharray="3 2" opacity="0.6"/>
+          <rect x="28" y="8" width="80" height="55" rx="3" fill="none" stroke="#22c55e" stroke-width="1.5" opacity="0.9"/>
+          <!-- green = wellbeing, red = friction -->
+          <circle cx="42" cy="32" r="3" fill="#22c55e" opacity="0.8"/>
+          <circle cx="55" cy="28" r="3" fill="#22c55e" opacity="0.6"/>
+          <circle cx="70" cy="40" r="3" fill="#ef4444" opacity="0.7"/>
+          <circle cx="38" cy="50" r="3" fill="#ef4444" opacity="0.5"/>
+          <circle cx="62" cy="52" r="3" fill="#22c55e" opacity="0.5"/>
+          <circle cx="80" cy="35" r="3" fill="#ef4444" opacity="0.4"/>
+          <!-- legend -->
+          <circle cx="18" cy="84" r="3" fill="#22c55e" opacity="0.7"/>
+          <text x="24" y="86" fill="#64748b" font-size="5.5" font-family="sans-serif">wellbeing</text>
+          <circle cx="58" cy="84" r="3" fill="#ef4444" opacity="0.7"/>
+          <text x="64" y="86" fill="#64748b" font-size="5.5" font-family="sans-serif">friction</text>
+        </svg>
+      </div>
+      <div class="data-content">
+        <h4>Wellbeing & Friction Heatmaps <span class="data-type type-spatial">Spatial</span></h4>
+        <p>Clear overlay on each table's map. Two sticker colours: green for "supports wellbeing" and red/orange for "creates friction". Participants mark places and routes on the overlay.</p>
+        <p class="capture-method"><strong>Capture:</strong> 2 maps × 3 sessions = 6 labelled overlays. Stack per map at end of night. Photograph stacked and individual.</p>
+      </div>
+    </div>
+
+    <div class="data-item" data-types="qual">
+      <div class="data-visual">
+        <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- card -->
+          <rect x="10" y="5" width="100" height="80" rx="4" fill="#1e293b" stroke="#22c55e" stroke-width="1.5"/>
+          <!-- sun icon for morning -->
+          <circle cx="24" cy="20" r="5" fill="#fbbf24" opacity="0.7"/>
+          <text x="34" y="22" fill="#22c55e" font-size="6" font-weight="bold" font-family="sans-serif">Morning</text>
+          <line x1="62" y1="20" x2="102" y2="20" stroke="#334155" stroke-width="1"/>
+          <!-- partial sun for arvo -->
+          <circle cx="24" cy="40" r="5" fill="#fb923c" opacity="0.6"/>
+          <rect x="19" y="40" width="10" height="6" fill="#1e293b"/>
+          <text x="34" y="42" fill="#22c55e" font-size="6" font-weight="bold" font-family="sans-serif">Afternoon</text>
+          <line x1="68" y1="40" x2="102" y2="40" stroke="#334155" stroke-width="1"/>
+          <!-- moon for evening -->
+          <circle cx="24" cy="60" r="5" fill="#818cf8" opacity="0.5"/>
+          <circle cx="27" cy="58" r="4" fill="#1e293b"/>
+          <text x="34" y="62" fill="#22c55e" font-size="6" font-weight="bold" font-family="sans-serif">Evening</text>
+          <line x1="63" y1="60" x2="102" y2="60" stroke="#334155" stroke-width="1"/>
+          <!-- bottom question -->
+          <text x="18" y="78" fill="#64748b" font-size="5" font-family="sans-serif">What makes this day work?</text>
+        </svg>
+      </div>
+      <div class="data-content">
+        <h4>A Healthy Day in Newcastle <span class="data-type type-qual">Qualitative</span></h4>
+        <p>Scaffolded card replaces free-form timeline cards. Each group designs a healthy day with three time blocks. Simple structure makes responses comparable and presentable.</p>
+        <div class="scaffold-example">
+          <div class="field"><span class="field-label">Morning:</span><span class="field-blank"></span></div>
+          <div class="field"><span class="field-label" style="font-size:0.65rem; color:#666;">Where + Activity</span><span class="field-blank"></span></div>
+          <div class="field"><span class="field-label">Afternoon:</span><span class="field-blank"></span></div>
+          <div class="field"><span class="field-label" style="font-size:0.65rem; color:#666;">Where + Activity</span><span class="field-blank"></span></div>
+          <div class="field"><span class="field-label">Evening:</span><span class="field-blank"></span></div>
+          <div class="field"><span class="field-label" style="font-size:0.65rem; color:#666;">Where + Activity</span><span class="field-blank"></span></div>
+          <div class="field"><span class="field-label">What makes this day work?</span><span class="field-blank"></span></div>
+        </div>
+        <p class="capture-method"><strong>Capture:</strong> One card per table per session. Collected into labelled envelope. ~6 cards total.</p>
+      </div>
+    </div>
+
+    <div class="data-item" data-types="qual">
+      <div class="data-visual">
+        <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="8" width="100" height="70" rx="3" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+          <rect x="16" y="14" width="22" height="18" rx="1" fill="#4ade80" opacity="0.7" transform="rotate(-2 27 23)"/>
+          <rect x="42" y="16" width="22" height="18" rx="1" fill="#4ade80" opacity="0.6" transform="rotate(1 53 25)"/>
+          <rect x="68" y="13" width="22" height="18" rx="1" fill="#4ade80" opacity="0.7" transform="rotate(-1 79 22)"/>
+          <rect x="20" y="38" width="22" height="18" rx="1" fill="#4ade80" opacity="0.5" transform="rotate(2 31 47)"/>
+          <rect x="48" y="40" width="22" height="18" rx="1" fill="#4ade80" opacity="0.6" transform="rotate(-1 59 49)"/>
+          <rect x="74" y="37" width="22" height="18" rx="1" fill="#4ade80" opacity="0.4" transform="rotate(1 85 46)"/>
+          <rect x="34" y="58" width="22" height="18" rx="1" fill="#4ade80" opacity="0.35" transform="rotate(-2 45 67)"/>
+          <rect x="60" y="60" width="22" height="18" rx="1" fill="#4ade80" opacity="0.25"/>
+          <line x1="19" y1="19" x2="33" y2="19" stroke="#166534" stroke-width="0.5" opacity="0.5"/>
+          <line x1="19" y1="23" x2="30" y2="23" stroke="#166534" stroke-width="0.5" opacity="0.5"/>
+          <line x1="45" y1="21" x2="59" y2="21" stroke="#166534" stroke-width="0.5" opacity="0.5"/>
+          <text x="60" y="87" text-anchor="middle" fill="#64748b" font-size="6" font-family="sans-serif">accumulates all night</text>
+        </svg>
+      </div>
+      <div class="data-content">
+        <h4>Wall Debate <span class="data-type type-qual">Qualitative</span></h4>
+        <p>"Is wellbeing a personal responsibility, or something a city should help design?" — sticky notes accumulate across all 3 sessions.</p>
+        <p class="capture-method"><strong>Capture:</strong> Leave in place all night. One photo at end of night.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- NIGHT-TIME DATA -->
+  <div class="data-room" style="border-left: 3px solid var(--night);">
+    <h3 style="color: var(--night);">Night-Time Culture & Economy Room — Data Collection</h3>
+    <div class="data-filters">
+      <button class="data-filter-btn active" data-filter="all">All</button>
+      <button class="data-filter-btn" data-filter="quant">Quantitative</button>
+      <button class="data-filter-btn" data-filter="qual">Qualitative</button>
+      <button class="data-filter-btn" data-filter="spatial">Spatial</button>
+      <button class="data-filter-btn" data-filter="digital">Digital</button>
+    </div>
+
+    <div class="data-item" data-types="quant digital">
+      <div class="data-visual">
+        <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="10" width="104" height="70" rx="6" fill="#1a1a2e" stroke="#a855f7" stroke-width="1.5"/>
+          <rect x="22" y="50" width="14" height="22" rx="2" fill="#a855f7" opacity="0.9"/>
+          <rect x="40" y="40" width="14" height="32" rx="2" fill="#a855f7" opacity="0.7"/>
+          <rect x="58" y="46" width="14" height="26" rx="2" fill="#a855f7" opacity="0.55"/>
+          <rect x="76" y="55" width="14" height="17" rx="2" fill="#a855f7" opacity="0.4"/>
+          <text x="60" y="26" text-anchor="middle" fill="#7c3aed" font-size="6.5" font-family="sans-serif">Night-time priorities?</text>
+          <circle cx="100" cy="18" r="4" fill="#a855f7" opacity="0.3"/>
+          <circle cx="100" cy="18" r="2" fill="#a855f7"/>
+        </svg>
+      </div>
+      <div class="data-content">
+        <h4>Night-Time Priority Ranking <span class="data-type type-quant">Quantitative</span> <span class="data-type type-digital">Digital</span></h4>
+        <p>Screen poll: "What should Newcastle's night-time priority be by 2050?" — forced ranking from a list (e.g. live music venues, late-night transport, safety & lighting, all-ages spaces, cultural events, outdoor dining, late-night services, accessible venues). Clean ranking data across all 3 sessions.</p>
+        <p class="capture-method"><strong>Capture:</strong> Auto-captured via Mentimeter/Slido. Run once per session.</p>
+      </div>
+    </div>
+
+    <div class="data-item" data-types="qual digital">
+      <div class="data-visual">
+        <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="10" width="104" height="70" rx="6" fill="#1a1a2e" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="22" y="36" fill="#c4b5fd" font-size="8" font-family="sans-serif">music</text>
+          <text x="44" y="50" fill="#a855f7" font-size="13" font-weight="bold" font-family="sans-serif">night</text>
+          <text x="18" y="55" fill="#c4b5fd" font-size="6" font-family="sans-serif">safe</text>
+          <text x="70" y="40" fill="#d8b4fe" font-size="9" font-family="sans-serif">culture</text>
+          <text x="25" y="68" fill="#c4b5fd" font-size="7" font-family="sans-serif">vibrant</text>
+          <text x="65" y="64" fill="#c4b5fd" font-size="6" font-family="sans-serif">food</text>
+          <text x="80" y="52" fill="#c4b5fd" font-size="5" font-family="sans-serif">festival</text>
+          <text x="55" y="28" fill="#d8b4fe" font-size="7" font-family="sans-serif">live</text>
+          <text x="80" y="72" fill="#c4b5fd" font-size="5" font-family="sans-serif">dance</text>
+          <text x="18" y="27" fill="#c4b5fd" font-size="6" font-family="sans-serif">late-night</text>
+        </svg>
+      </div>
+      <div class="data-content">
+        <h4>Open Screen Prompt <span class="data-type type-qual">Qualitative</span> <span class="data-type type-digital">Digital</span></h4>
+        <p>"What night experience should Newcastle have by 2050?" — open text responses.</p>
+        <p class="capture-method"><strong>Capture:</strong> Auto-captured. Exportable for theming.</p>
+      </div>
+    </div>
+
+    <div class="data-item" data-types="spatial">
+      <div class="data-visual">
+        <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- dark map background -->
+          <rect x="10" y="10" width="100" height="65" rx="3" fill="#0f0a1e" stroke="#2d1b4e" stroke-width="1.5"/>
+          <!-- faint road grid -->
+          <line x1="30" y1="10" x2="30" y2="75" stroke="#1a1040" stroke-width="0.5"/>
+          <line x1="55" y1="10" x2="55" y2="75" stroke="#1a1040" stroke-width="0.5"/>
+          <line x1="80" y1="10" x2="80" y2="75" stroke="#1a1040" stroke-width="0.5"/>
+          <line x1="10" y1="30" x2="110" y2="30" stroke="#1a1040" stroke-width="0.5"/>
+          <line x1="10" y1="52" x2="110" y2="52" stroke="#1a1040" stroke-width="0.5"/>
+          <!-- glow dots: green=best, red=avoid, yellow=potential -->
+          <circle cx="35" cy="25" r="5" fill="#22c55e" opacity="0.7"/>
+          <circle cx="38" cy="28" r="3" fill="#22c55e" opacity="0.4"/>
+          <circle cx="60" cy="35" r="6" fill="#22c55e" opacity="0.6"/>
+          <circle cx="75" cy="22" r="4" fill="#eab308" opacity="0.7"/>
+          <circle cx="90" cy="45" r="5" fill="#eab308" opacity="0.5"/>
+          <circle cx="45" cy="55" r="5" fill="#ef4444" opacity="0.6"/>
+          <circle cx="25" cy="48" r="4" fill="#ef4444" opacity="0.5"/>
+          <circle cx="85" cy="60" r="4" fill="#22c55e" opacity="0.4"/>
+          <!-- legend -->
+          <circle cx="20" cy="84" r="3" fill="#22c55e" opacity="0.7"/>
+          <text x="26" y="86" fill="#64748b" font-size="5" font-family="sans-serif">best</text>
+          <circle cx="48" cy="84" r="3" fill="#ef4444" opacity="0.7"/>
+          <text x="54" y="86" fill="#64748b" font-size="5" font-family="sans-serif">avoid</text>
+          <circle cx="78" cy="84" r="3" fill="#eab308" opacity="0.7"/>
+          <text x="84" y="86" fill="#64748b" font-size="5" font-family="sans-serif">potential</text>
+        </svg>
+      </div>
+      <div class="data-content">
+        <h4>Glow Map Heatmaps <span class="data-type type-spatial">Spatial</span></h4>
+        <p>Clear overlay on the Glow Map. Three sticker colours: green for "best places at night", red for "places people avoid", yellow/amber for "places with potential".</p>
+        <p class="capture-method"><strong>Capture:</strong> 1 Glow Map × 3 sessions = 3 labelled overlays. Stack at end of night for composite. Photograph stacked and individual.</p>
+      </div>
+    </div>
+
+    <div class="data-item" data-types="qual">
+      <div class="data-visual">
+        <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- card -->
+          <rect x="10" y="5" width="100" height="80" rx="4" fill="#1a1a2e" stroke="#a855f7" stroke-width="1.5"/>
+          <!-- persona silhouette -->
+          <circle cx="26" cy="16" r="6" fill="#a855f7" opacity="0.4"/>
+          <ellipse cx="26" cy="28" rx="8" ry="5" fill="#a855f7" opacity="0.3"/>
+          <!-- fields -->
+          <text x="42" y="18" fill="#a855f7" font-size="5.5" font-weight="bold" font-family="sans-serif">Persona:</text>
+          <line x1="65" y1="16" x2="102" y2="16" stroke="#334155" stroke-width="1"/>
+          <text x="18" y="40" fill="#a855f7" font-size="5" font-weight="bold" font-family="sans-serif">Where:</text>
+          <line x1="42" y1="38" x2="102" y2="38" stroke="#334155" stroke-width="1"/>
+          <text x="18" y="50" fill="#a855f7" font-size="5" font-weight="bold" font-family="sans-serif">How they travel:</text>
+          <line x1="62" y1="48" x2="102" y2="48" stroke="#334155" stroke-width="1"/>
+          <text x="18" y="60" fill="#a855f7" font-size="5" font-weight="bold" font-family="sans-serif">What they do:</text>
+          <line x1="58" y1="58" x2="102" y2="58" stroke="#334155" stroke-width="1"/>
+          <text x="18" y="70" fill="#a855f7" font-size="5" font-weight="bold" font-family="sans-serif">Barriers:</text>
+          <line x1="45" y1="68" x2="102" y2="68" stroke="#334155" stroke-width="1"/>
+          <text x="18" y="80" fill="#a855f7" font-size="5" font-weight="bold" font-family="sans-serif">One change:</text>
+          <line x1="52" y1="78" x2="102" y2="78" stroke="#334155" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="data-content">
+        <h4>Persona Night Experience Cards <span class="data-type type-qual">Qualitative</span></h4>
+        <p>Structured response card for the persona activity. Each group gets a persona and fills in the same fields — makes the data directly comparable across personas and sessions.</p>
+        <div class="scaffold-example">
+          <div class="field"><span class="field-label">Persona:</span><span class="field-blank"></span></div>
+          <div class="field"><span class="field-label">Where they go:</span><span class="field-blank"></span></div>
+          <div class="field"><span class="field-label">How they travel:</span><span class="field-blank"></span></div>
+          <div class="field"><span class="field-label">What they do:</span><span class="field-blank"></span></div>
+          <div class="field"><span class="field-label">What makes it great:</span><span class="field-blank"></span></div>
+          <div class="field"><span class="field-label">Barriers right now:</span><span class="field-blank"></span></div>
+          <div class="field"><span class="field-label">One change to fix it:</span><span class="field-blank"></span></div>
+        </div>
+        <p class="capture-method"><strong>Capture:</strong> One card per group per session. Collected into labelled envelope. ~6 cards total across 3 sessions.</p>
+      </div>
+    </div>
+
+    <div class="data-item" data-types="qual">
+      <div class="data-visual">
+        <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- card -->
+          <rect x="15" y="10" width="90" height="70" rx="4" fill="#1a1a2e" stroke="#a855f7" stroke-width="1.5"/>
+          <!-- memory/nostalgia visual — stars + moon -->
+          <circle cx="85" cy="22" r="4" fill="#c4b5fd" opacity="0.4"/>
+          <circle cx="87" cy="21" r="3.5" fill="#1a1a2e"/>
+          <circle cx="72" cy="18" r="1" fill="#c4b5fd" opacity="0.5"/>
+          <circle cx="78" cy="26" r="0.8" fill="#c4b5fd" opacity="0.3"/>
+          <circle cx="68" cy="24" r="1.2" fill="#c4b5fd" opacity="0.4"/>
+          <!-- fields -->
+          <text x="23" y="28" fill="#a855f7" font-size="6" font-weight="bold" font-family="sans-serif">The experience:</text>
+          <line x1="23" y1="33" x2="97" y2="33" stroke="#334155" stroke-width="1"/>
+          <line x1="23" y1="41" x2="97" y2="41" stroke="#334155" stroke-width="1"/>
+          <text x="23" y="52" fill="#a855f7" font-size="6" font-weight="bold" font-family="sans-serif">Where / when:</text>
+          <line x1="65" y1="50" x2="97" y2="50" stroke="#334155" stroke-width="1"/>
+          <text x="23" y="66" fill="#a855f7" font-size="6" font-weight="bold" font-family="sans-serif">Still exist?</text>
+          <rect x="55" y="60" width="10" height="10" rx="1.5" fill="none" stroke="#a855f7" stroke-width="1" opacity="0.5"/>
+          <text x="58" y="68" fill="#a855f7" font-size="6" font-family="sans-serif">Y</text>
+          <rect x="70" y="60" width="10" height="10" rx="1.5" fill="none" stroke="#a855f7" stroke-width="1" opacity="0.5"/>
+          <text x="73.5" y="68" fill="#a855f7" font-size="6" font-family="sans-serif">N</text>
+        </svg>
+      </div>
+      <div class="data-content">
+        <h4>Best Night in Newcastle — Memory Cards <span class="data-type type-qual">Qualitative</span></h4>
+        <p>Short individual cards: "Describe your best night out in Newcastle. Does the venue/space still exist?" Captures the nostalgia angle and the loss/preservation question in one artefact.</p>
+        <div class="scaffold-example">
+          <div class="field"><span class="field-label">The experience:</span><span class="field-blank"></span></div>
+          <div class="field"><span class="field-label">Where / when:</span><span class="field-blank"></span></div>
+          <div class="field"><span class="field-label">Still exist?</span><span class="field-blank"></span></div>
+        </div>
+        <p class="capture-method"><strong>Capture:</strong> Individual cards, collected into envelope. Optional — participants fill these in while waiting or during transitions.</p>
+      </div>
+    </div>
+
+    <div class="data-item" data-types="qual">
+      <div class="data-visual">
+        <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="8" width="100" height="70" rx="3" fill="#1a1a2e" stroke="#2d1b4e" stroke-width="1.5"/>
+          <rect x="16" y="14" width="22" height="18" rx="1" fill="#c084fc" opacity="0.7" transform="rotate(-2 27 23)"/>
+          <rect x="42" y="16" width="22" height="18" rx="1" fill="#c084fc" opacity="0.6" transform="rotate(1 53 25)"/>
+          <rect x="68" y="13" width="22" height="18" rx="1" fill="#c084fc" opacity="0.7" transform="rotate(-1 79 22)"/>
+          <rect x="20" y="38" width="22" height="18" rx="1" fill="#c084fc" opacity="0.5" transform="rotate(2 31 47)"/>
+          <rect x="48" y="40" width="22" height="18" rx="1" fill="#c084fc" opacity="0.6" transform="rotate(-1 59 49)"/>
+          <rect x="74" y="37" width="22" height="18" rx="1" fill="#c084fc" opacity="0.4" transform="rotate(1 85 46)"/>
+          <rect x="34" y="58" width="22" height="18" rx="1" fill="#c084fc" opacity="0.35" transform="rotate(-2 45 67)"/>
+          <rect x="60" y="60" width="22" height="18" rx="1" fill="#c084fc" opacity="0.25"/>
+          <line x1="19" y1="19" x2="33" y2="19" stroke="#581c87" stroke-width="0.5" opacity="0.5"/>
+          <line x1="19" y1="23" x2="30" y2="23" stroke="#581c87" stroke-width="0.5" opacity="0.5"/>
+          <line x1="45" y1="21" x2="59" y2="21" stroke="#581c87" stroke-width="0.5" opacity="0.5"/>
+          <text x="60" y="87" text-anchor="middle" fill="#64748b" font-size="6" font-family="sans-serif">accumulates all night</text>
+        </svg>
+      </div>
+      <div class="data-content">
+        <h4>Wall Debate <span class="data-type type-qual">Qualitative</span></h4>
+        <p>"Who is Newcastle's night currently designed for, and who is left out?" — sticky notes accumulate across all 3 sessions.</p>
+        <p class="capture-method"><strong>Capture:</strong> Leave in place all night. One photo at end of night.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- END OF NIGHT -->
+  <div class="end-of-night">
+    <h3>End-of-Night Data Collection Protocol</h3>
+    <p style="font-size:0.85rem; color:#ccc; margin-bottom:0.75rem;">Session 3 wraps at 8:10 pm. One person per room does a quick circuit while volunteers guide guests downstairs for closing remarks at 8:15 pm. Total time: ~5 minutes per room.</p>
+    <ol>
+      <li><strong>Overlay sheets:</strong> Already labelled and set aside after each session. Stack all overlays on the base map and photograph from above (composite view). Then photograph each overlay individually. (~3 photos per map)</li>
+      <li><strong>Wall prompts:</strong> Photograph the full sticky note wall as-is. (~1 photo per room)</li>
+      <li><strong>Remaining table artefacts:</strong> Photo any pin-and-string routes (Transport), token boards (Health), or Glow Map details (Night-Time) still on tables.</li>
+      <li><strong>Collect envelopes:</strong> Gather all labelled card envelopes (should already be sorted by session). One bag per room.</li>
+      <li><strong>Tally sheets:</strong> Collect the token allocation tally sheets from Health & Wellbeing.</li>
+      <li><strong>Screen data:</strong> No action needed — already saved digitally. Export after the event.</li>
+    </ol>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="data-principles">
+    <h3>Materials to Prepare</h3>
+    <ul>
+      <li><strong>Clear overlay sheets / acetate:</strong> At least 15 sheets (6 for Transport — 2 maps × 3 sessions, 6 for Health — 2 maps × 3 sessions, 3 for Night-Time Glow Map only — persona table uses response cards instead of overlays, plus spares). Cut to map size. Source from office supply or art stores — OHP transparencies or clear acetate rolls work.</li>
+      <li><strong>Dot stickers:</strong> 4 colours minimum. Green, red/orange, yellow/amber, and blue. Standard office dot stickers (8–10mm). ~200 per colour should be ample.</li>
+      <li><strong>Pre-printed cards:</strong> Transport Change Cards (~75), Healthy Day Cards (~20), Persona Night Cards (~20), Memory Cards (~40). Print on card stock, A5 size.</li>
+      <li><strong>Tally sheets:</strong> 6 copies of the investment allocation tally (Health & Wellbeing room).</li>
+      <li><strong>Labelled envelopes:</strong> 9 large envelopes (3 rooms × 3 sessions), pre-labelled with room name and session number.</li>
+      <li><strong>Marker pens:</strong> Fine-tip permanent markers that write on acetate (e.g. Sharpie ultra-fine). For participants who want to annotate overlays.</li>
+    </ul>
+  </div>
+  </section>
+  </div>
+</div>
+
+<!-- FACILITATOR GUIDE -->
+<div id="facilitators" class="collapsible collapsed">
+  <button class="section-toggle" onclick="toggleSection(this)">Facilitator Guide <span class="chevron">&#9660;</span></button>
+  <div class="collapsible-content">
+  <section class="facilitator">
+
+  <div class="facilitator-card">
+    <h3>General Approach</h3>
+    <ul>
+      <li>Briefly set the scene with local context, trends, or tensions</li>
+      <li>Circulate and prompt deeper thinking across tables</li>
+      <li>Offer light reality-checks without shutting ideas down</li>
+      <li>Help identify patterns and themes during debriefs</li>
+      <li>Connect ideas back to the broader future of Newcastle</li>
+      <li><strong>Tone:</strong> welcoming, creative, informed, and optimistic — while inviting engagement with real tensions and trade-offs</li>
+    </ul>
+  </div>
+
+  <div class="facilitator-card" style="border-left: 3px solid var(--transport);">
+    <h3 style="color: var(--transport);">Room 1: Transport & Mobility</h3>
+    <p style="font-size:0.85rem; color:#ccc; margin-bottom:0.75rem;"><strong>Focus:</strong> Encourage thinking about both everyday usability and big-picture infrastructure. Prompt discussion around accessibility, reduced car dependence, regional links, tourism, and how transport shapes the experience of city life.</p>
+    <ul>
+      <li>What transport changes would most improve daily life for residents?</li>
+      <li>How could the CBD connect to the wider region, airport, and future growth areas?</li>
+      <li>What would make Newcastle feel innovative, accessible, and well-connected by 2050?</li>
+      <li><strong>Challenge:</strong> By 2050, what should Newcastle feel like to move through, and what must we design differently now?</li>
+    </ul>
+  </div>
+
+  <div class="facilitator-card" style="border-left: 3px solid var(--health);">
+    <h3 style="color: var(--health);">Room 2: Health & Wellbeing</h3>
+    <p style="font-size:0.85rem; color:#ccc; margin-bottom:0.75rem;"><strong>Focus:</strong> Help participants think beyond healthcare toward the daily environments that shape wellbeing. Consider who the city currently supports, where friction exists, and what investments could make Newcastle healthier and more inclusive.</p>
+    <ul>
+      <li>Health is shaped by daily environment as much as healthcare systems</li>
+      <li>Access to nature improves mental health and longevity</li>
+      <li>Walkable cities reduce chronic disease</li>
+      <li>Social connection is a major predictor of wellbeing</li>
+      <li>Urban isolation and sedentary lifestyles are growing risks</li>
+      <li><strong>Challenge:</strong> By 2050, what should Newcastle feel like as a place to live well, and what must we design differently now?</li>
+    </ul>
+  </div>
+
+  <div class="facilitator-card" style="border-left: 3px solid var(--night);">
+    <h3 style="color: var(--night);">Room 3: Night-Time Culture & Economy</h3>
+    <p style="font-size:0.85rem; color:#ccc; margin-bottom:0.75rem;"><strong>Focus:</strong> Encourage broad thinking about night culture — not only bars and restaurants, but live music, arts, festivals, transport, safety, accessibility, late-night activity, and who the city is designed for after dark. Knowledge of Newcastle's nightlife history is beneficial.</p>
+    <ul>
+      <li>Newcastle's nighttime culture has a rich and complex history</li>
+      <li>The city is actively trying to rebuild and diversify its night economy</li>
+      <li>Night-time culture includes live music, theatre, food, festivals, public life, transport, and creative experiences</li>
+      <li>A great night city must work for different people, not just one type of patron</li>
+      <li><strong>Challenge:</strong> By 2050, what should Newcastle feel like after dark, and what must change to make that possible?</li>
+    </ul>
+  </div>
+  </section>
+  </div>
+</div>
+
+<!-- CARD MOCKUPS -->
+<div id="cards" class="collapsible">
+  <button class="section-toggle" onclick="toggleSection(this)">Printable Card Mockups <span class="chevron">&#9660;</span></button>
+  <div class="collapsible-content">
+  <section style="padding: 1.5rem 0;">
+
+  <!-- RESPONSE CARDS -->
+  <p class="card-section-label" style="color: var(--text-muted); padding: 0 0.5rem;">Response Cards — participants fill these in during activities</p>
+  <div class="card-mockups-grid">
+
+    <!-- Transport Change Card -->
+    <div class="card-mockup">
+      <div class="card-room-tab tab-transport">Transport</div>
+      <div class="card-title" style="color: var(--transport);">Transport Change Card</div>
+      <div class="card-subtitle">Describe one transport improvement for Newcastle 2050</div>
+
+      <div class="card-field">
+        <span class="card-field-label">The change:</span>
+        <span class="card-field-line"></span>
+      </div>
+      <div class="card-field-area"></div>
+
+      <div class="card-field">
+        <span class="card-field-label">Where:</span>
+        <span class="card-field-line"></span>
+      </div>
+
+      <div class="card-field">
+        <span class="card-field-label">Who benefits:</span>
+        <span class="card-field-line"></span>
+      </div>
+
+      <div class="card-field">
+        <span class="card-field-label">Why it matters:</span>
+        <span class="card-field-line"></span>
+      </div>
+      <div class="card-field-area"></div>
+
+      <div class="card-tedx-logo"><span>TEDx</span>Newy Salon 2026</div>
+    </div>
+
+    <!-- Healthy Day Card -->
+    <div class="card-mockup">
+      <div class="card-room-tab tab-health">Health</div>
+      <div class="card-title" style="color: var(--health);">A Healthy Day in Newcastle</div>
+      <div class="card-subtitle">Design a perfect healthy day in the city — 2050 or today</div>
+
+      <div class="card-field">
+        <span class="card-field-label" style="color: #ca8a04;">&#9728; Morning:</span>
+        <span class="card-field-line"></span>
+      </div>
+      <div class="card-field-hint">Where + What you'd do</div>
+      <div class="card-field-area"></div>
+
+      <div class="card-field">
+        <span class="card-field-label" style="color: #ea580c;">&#9788; Afternoon:</span>
+        <span class="card-field-line"></span>
+      </div>
+      <div class="card-field-hint">Where + What you'd do</div>
+      <div class="card-field-area"></div>
+
+      <div class="card-field">
+        <span class="card-field-label" style="color: #7c3aed;">&#9790; Evening:</span>
+        <span class="card-field-line"></span>
+      </div>
+      <div class="card-field-hint">Where + What you'd do</div>
+      <div class="card-field-area"></div>
+
+      <hr class="card-divider">
+      <div class="card-field">
+        <span class="card-field-label">What makes this day work?</span>
+      </div>
+      <div class="card-field-area" style="min-height: 2rem;"></div>
+
+      <div class="card-tedx-logo"><span>TEDx</span>Newy Salon 2026</div>
+    </div>
+
+    <!-- Persona Night Experience Card -->
+    <div class="card-mockup">
+      <div class="card-room-tab tab-night">Night-Time</div>
+      <div class="card-title" style="color: var(--night);">Persona Night Experience</div>
+      <div class="card-subtitle">Design a night out in Newcastle for your persona</div>
+
+      <div class="card-field">
+        <span class="card-field-label">Persona:</span>
+        <span class="card-field-line"></span>
+      </div>
+
+      <div class="card-field">
+        <span class="card-field-label">Where they go:</span>
+        <span class="card-field-line"></span>
+      </div>
+      <div class="card-field-area" style="min-height: 1.5rem;"></div>
+
+      <div class="card-field">
+        <span class="card-field-label">How they travel:</span>
+        <span class="card-field-line"></span>
+      </div>
+
+      <div class="card-field">
+        <span class="card-field-label">What they do:</span>
+        <span class="card-field-line"></span>
+      </div>
+      <div class="card-field-area" style="min-height: 1.5rem;"></div>
+
+      <div class="card-field">
+        <span class="card-field-label">What makes it great:</span>
+        <span class="card-field-line"></span>
+      </div>
+      <div class="card-field-area" style="min-height: 1.5rem;"></div>
+
+      <div class="card-field">
+        <span class="card-field-label">Barriers right now:</span>
+        <span class="card-field-line"></span>
+      </div>
+      <div class="card-field-area" style="min-height: 1.5rem;"></div>
+
+      <div class="card-field">
+        <span class="card-field-label">One change to fix it:</span>
+        <span class="card-field-line"></span>
+      </div>
+      <div class="card-field-area" style="min-height: 1.5rem;"></div>
+
+      <div class="card-tedx-logo"><span>TEDx</span>Newy Salon 2026</div>
+    </div>
+
+    <!-- Memory Card -->
+    <div class="card-mockup">
+      <div class="card-room-tab tab-night">Night-Time</div>
+      <div class="card-title" style="color: var(--night);">Best Night in Newcastle</div>
+      <div class="card-subtitle">Share a favourite night-time memory from the city</div>
+
+      <div class="card-field">
+        <span class="card-field-label">The experience:</span>
+      </div>
+      <div class="card-field-area" style="min-height: 4rem;"></div>
+
+      <div class="card-field">
+        <span class="card-field-label">Where:</span>
+        <span class="card-field-line"></span>
+      </div>
+
+      <div class="card-field">
+        <span class="card-field-label">When (roughly):</span>
+        <span class="card-field-line"></span>
+      </div>
+
+      <hr class="card-divider">
+      <div style="font-size: 0.8rem; font-weight: 700; margin-bottom: 0.3rem;">Does this venue / space still exist?</div>
+      <div class="card-checkbox-row">
+        <div class="card-checkbox"><div class="box"></div> Yes</div>
+        <div class="card-checkbox"><div class="box"></div> No</div>
+        <div class="card-checkbox"><div class="box"></div> Changed beyond recognition</div>
+      </div>
+      <div class="card-field-hint">If gone or changed, what was lost?</div>
+      <div class="card-field-area" style="min-height: 2rem;"></div>
+
+      <div class="card-tedx-logo"><span>TEDx</span>Newy Salon 2026</div>
+    </div>
+
+  </div>
+
+  <!-- PERSONA CARDS -->
+  <p class="card-section-label" style="color: var(--text-muted); padding: 0 0.5rem; margin-top: 1.5rem;">Persona Cards — pre-printed, one given to each group in the Night-Time room</p>
+  <div class="card-mockups-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
+
+    <div class="card-mockup persona-card">
+      <div class="card-room-tab tab-night">Night-Time</div>
+      <div class="persona-icon">🎓</div>
+      <div class="persona-name">Uni Student</div>
+      <div class="persona-desc">On a budget. Wants to go out but doesn't always want to drink. Relies on public transport or rideshare.</div>
+      <div class="card-tedx-logo"><span>TEDx</span>Newy</div>
+    </div>
+
+    <div class="card-mockup persona-card">
+      <div class="card-room-tab tab-night">Night-Time</div>
+      <div class="persona-icon">🏭</div>
+      <div class="persona-name">Shift Worker</div>
+      <div class="persona-desc">Finishes late. Needs food, transport, and somewhere to unwind after 10pm. Limited options right now.</div>
+      <div class="card-tedx-logo"><span>TEDx</span>Newy</div>
+    </div>
+
+    <div class="card-mockup persona-card">
+      <div class="card-room-tab tab-night">Night-Time</div>
+      <div class="persona-icon">🧑‍🦱</div>
+      <div class="persona-name">17-Year-Old</div>
+      <div class="persona-desc">Underage. Wants fun, safe, social spaces. Most nightlife isn't designed for them.</div>
+      <div class="card-tedx-logo"><span>TEDx</span>Newy</div>
+    </div>
+
+    <div class="card-mockup persona-card">
+      <div class="card-room-tab tab-night">Night-Time</div>
+      <div class="persona-icon">🍵</div>
+      <div class="persona-name">Non-Drinker</div>
+      <div class="persona-desc">Chooses not to drink. Wants a great night out that doesn't revolve around alcohol.</div>
+      <div class="card-tedx-logo"><span>TEDx</span>Newy</div>
+    </div>
+
+    <div class="card-mockup persona-card">
+      <div class="card-room-tab tab-night">Night-Time</div>
+      <div class="persona-icon">👵</div>
+      <div class="persona-name">Older Resident</div>
+      <div class="persona-desc">Remembers Newcastle's nightlife history. Values safety, accessibility, and cultural options over late-night venues.</div>
+      <div class="card-tedx-logo"><span>TEDx</span>Newy</div>
+    </div>
+
+    <div class="card-mockup persona-card">
+      <div class="card-room-tab tab-night">Night-Time</div>
+      <div class="persona-icon">♿</div>
+      <div class="persona-name">Disabled Patron</div>
+      <div class="persona-desc">Needs accessible venues, transport, and wayfinding. Often finds the night-time city wasn't designed with them in mind.</div>
+      <div class="card-tedx-logo"><span>TEDx</span>Newy</div>
+    </div>
+
+    <div class="card-mockup persona-card">
+      <div class="card-room-tab tab-night">Night-Time</div>
+      <div class="persona-icon">👨‍👧</div>
+      <div class="persona-name">Parent (After 8pm)</div>
+      <div class="persona-desc">Kids are with a sitter. Looking for culture, food, or live entertainment — not just bars. Limited window before needing to get home.</div>
+      <div class="card-tedx-logo"><span>TEDx</span>Newy</div>
+    </div>
+
+  </div>
+
+  <!-- REFERENCE CARDS -->
+  <p class="card-section-label" style="color: var(--text-muted); padding: 0 0.5rem; margin-top: 1.5rem;">Reference Cards &amp; Facilitator Sheets — printed for tables</p>
+  <div class="card-mockups-grid">
+
+    <!-- Transport Token Legend -->
+    <div class="card-mockup">
+      <div class="card-room-tab tab-transport">Transport</div>
+      <div class="card-title" style="color: var(--transport);">Token Legend</div>
+      <div class="card-subtitle">What each 3D token represents on the map</div>
+
+      <div class="legend-item"><div class="legend-token-icon">🚆</div> <strong>Train</strong> — heavy rail station or line</div>
+      <div class="legend-item"><div class="legend-token-icon">🚋</div> <strong>Light Rail</strong> — light rail stop or extension</div>
+      <div class="legend-item"><div class="legend-token-icon">🚲</div> <strong>Bike</strong> — cycleway, bike hub, or bike-share</div>
+      <div class="legend-item"><div class="legend-token-icon">⛴</div> <strong>Ferry</strong> — ferry terminal or water transit</div>
+      <div class="legend-item"><div class="legend-token-icon">🚗</div> <strong>Car</strong> — road, parking, or EV charging</div>
+      <div class="legend-item"><div class="legend-token-icon">🤖</div> <strong>Autonomous Pod</strong> — future autonomous transit</div>
+      <div class="legend-item"><div class="legend-token-icon">🚶</div> <strong>Walking</strong> — pedestrian zone or walkway</div>
+      <div class="legend-item"><div class="legend-token-icon">♿</div> <strong>Accessibility Hub</strong> — accessible interchange</div>
+
+      <div class="card-tedx-logo"><span>TEDx</span>Newy Salon 2026</div>
+    </div>
+
+    <!-- Glow Map Legend -->
+    <div class="card-mockup" style="background: #111; color: #eee;">
+      <div class="card-room-tab tab-night">Night-Time</div>
+      <div class="card-title" style="color: var(--night);">Glow Map Legend</div>
+      <div class="card-subtitle" style="color: #888;">Use the coloured stickers to mark the map</div>
+
+      <div class="legend-item"><div class="legend-swatch" style="background: #22c55e; box-shadow: 0 0 8px #22c55e;"></div> <strong>Best places at night</strong> — where you love to go</div>
+      <div class="legend-item"><div class="legend-swatch" style="background: #ef4444; box-shadow: 0 0 8px #ef4444;"></div> <strong>Places people avoid</strong> — unsafe, unwelcoming, or dead</div>
+      <div class="legend-item"><div class="legend-swatch" style="background: #eab308; box-shadow: 0 0 8px #eab308;"></div> <strong>Places with potential</strong> — could be great, but isn't yet</div>
+
+      <hr class="card-divider" style="border-color: #333;">
+      <div style="font-size: 0.75rem; color: #888; margin-top: 0.3rem;">Place stickers on the clear overlay sheet, not directly on the map. One sticker per location — but you can use multiple colours if a place is complex.</div>
+
+      <div class="card-tedx-logo"><span>TEDx</span>Newy Salon 2026</div>
+    </div>
+
+    <!-- Investment Allocation Board -->
+    <div class="card-mockup card-landscape">
+      <div class="card-room-tab tab-health">Health</div>
+      <div class="card-title" style="color: var(--health);">Investment Allocation Board</div>
+      <div class="card-subtitle">Your group has 15 tokens. Place them where Newcastle should invest for wellbeing by 2050.</div>
+
+      <div class="alloc-row">
+        <span class="alloc-label" style="color: #16a34a;">🌿 Green Space</span>
+        <div class="alloc-slots">
+          <div class="alloc-slot"></div><div class="alloc-slot"></div><div class="alloc-slot"></div>
+          <div class="alloc-slot"></div><div class="alloc-slot"></div><div class="alloc-slot"></div>
+          <div class="alloc-slot"></div><div class="alloc-slot"></div><div class="alloc-slot"></div>
+          <div class="alloc-slot"></div>
+        </div>
+      </div>
+      <div class="alloc-row">
+        <span class="alloc-label" style="color: #0284c7;">🚶 Active Transport</span>
+        <div class="alloc-slots">
+          <div class="alloc-slot"></div><div class="alloc-slot"></div><div class="alloc-slot"></div>
+          <div class="alloc-slot"></div><div class="alloc-slot"></div><div class="alloc-slot"></div>
+          <div class="alloc-slot"></div><div class="alloc-slot"></div><div class="alloc-slot"></div>
+          <div class="alloc-slot"></div>
+        </div>
+      </div>
+      <div class="alloc-row">
+        <span class="alloc-label" style="color: #d97706;">🏘 Community Hubs</span>
+        <div class="alloc-slots">
+          <div class="alloc-slot"></div><div class="alloc-slot"></div><div class="alloc-slot"></div>
+          <div class="alloc-slot"></div><div class="alloc-slot"></div><div class="alloc-slot"></div>
+          <div class="alloc-slot"></div><div class="alloc-slot"></div><div class="alloc-slot"></div>
+          <div class="alloc-slot"></div>
+        </div>
+      </div>
+      <div class="alloc-row">
+        <span class="alloc-label" style="color: #9333ea;">🧠 Youth Mental Health</span>
+        <div class="alloc-slots">
+          <div class="alloc-slot"></div><div class="alloc-slot"></div><div class="alloc-slot"></div>
+          <div class="alloc-slot"></div><div class="alloc-slot"></div><div class="alloc-slot"></div>
+          <div class="alloc-slot"></div><div class="alloc-slot"></div><div class="alloc-slot"></div>
+          <div class="alloc-slot"></div>
+        </div>
+      </div>
+      <div class="alloc-row">
+        <span class="alloc-label" style="color: #0d9488;">🧘 Quiet / Rest Spaces</span>
+        <div class="alloc-slots">
+          <div class="alloc-slot"></div><div class="alloc-slot"></div><div class="alloc-slot"></div>
+          <div class="alloc-slot"></div><div class="alloc-slot"></div><div class="alloc-slot"></div>
+          <div class="alloc-slot"></div><div class="alloc-slot"></div><div class="alloc-slot"></div>
+          <div class="alloc-slot"></div>
+        </div>
+      </div>
+      <div class="alloc-row" style="border-bottom: none;">
+        <span class="alloc-label" style="color: #e11d48;">❤ Wellbeing Services</span>
+        <div class="alloc-slots">
+          <div class="alloc-slot"></div><div class="alloc-slot"></div><div class="alloc-slot"></div>
+          <div class="alloc-slot"></div><div class="alloc-slot"></div><div class="alloc-slot"></div>
+          <div class="alloc-slot"></div><div class="alloc-slot"></div><div class="alloc-slot"></div>
+          <div class="alloc-slot"></div>
+        </div>
+      </div>
+
+      <div class="card-tedx-logo"><span>TEDx</span>Newy Salon 2026</div>
+    </div>
+
+    <!-- Token Allocation Tally Sheet -->
+    <div class="card-mockup card-landscape">
+      <div class="card-room-tab tab-health">Health</div>
+      <div class="card-title" style="color: var(--health);">Token Allocation Tally Sheet</div>
+      <div class="card-subtitle">Facilitator use — record token counts before resetting for next group</div>
+
+      <div class="card-field" style="margin-bottom: 0.75rem;">
+        <span class="card-field-label">Table #:</span>
+        <span class="card-field-line" style="max-width: 60px;"></span>
+        <span class="card-field-label" style="margin-left: 1rem;">Session #:</span>
+        <span class="card-field-line" style="max-width: 60px;"></span>
+      </div>
+
+      <table class="tally-grid">
+        <thead>
+          <tr>
+            <th style="text-align: left;">Category</th>
+            <th>Tokens</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="text-align: left;">🌿 Green Space</td><td></td></tr>
+          <tr><td style="text-align: left;">🚶 Active Transport</td><td></td></tr>
+          <tr><td style="text-align: left;">🏘 Community Hubs</td><td></td></tr>
+          <tr><td style="text-align: left;">🧠 Youth Mental Health</td><td></td></tr>
+          <tr><td style="text-align: left;">🧘 Quiet / Rest Spaces</td><td></td></tr>
+          <tr><td style="text-align: left;">❤ Wellbeing Services</td><td></td></tr>
+          <tr><td style="text-align: left; font-weight: 700;">Total</td><td style="font-weight: 700;"></td></tr>
+        </tbody>
+      </table>
+
+      <div style="font-size: 0.7rem; color: #999; margin-top: 0.5rem;">Count tokens, record, then sweep back into the bowl for the next group.</div>
+      <div class="card-tedx-logo"><span>TEDx</span>Newy Salon 2026</div>
+    </div>
+
+  </div>
+
+  </section>
+  </div>
+</div>
+
+<!-- ASSET CHECKLISTS -->
+<div id="assets" class="collapsible">
+  <button class="section-toggle" onclick="toggleSection(this)">Asset Checklists <span class="chevron">&#9660;</span></button>
+  <div class="collapsible-content">
+  <section class="assets">
+  <div class="firebase-status" id="fb-status">Connecting to shared checklist...</div>
+
+  <div class="asset-room room transport">
+    <h3 style="color: var(--transport);">Transport Room</h3>
+    <div class="asset-columns">
+      <div class="asset-group">
+        <h4>Printed</h4>
+        <ul>
+          <li><input type="checkbox" id="t-p-1"><label for="t-p-1">3x large Newcastle CBD map</label></li>
+          <li><input type="checkbox" id="t-p-2"><label for="t-p-2">3x large Greater Newcastle map</label></li>
+          <li><input type="checkbox" id="t-p-3"><label for="t-p-3">Legend card (token meanings)</label></li>
+        </ul>
+      </div>
+      <div class="asset-group">
+        <h4>3D Tokens</h4>
+        <ul>
+          <li><input type="checkbox" id="t-t-1"><label for="t-t-1">Train</label></li>
+          <li><input type="checkbox" id="t-t-2"><label for="t-t-2">Light rail</label></li>
+          <li><input type="checkbox" id="t-t-3"><label for="t-t-3">Bike</label></li>
+          <li><input type="checkbox" id="t-t-4"><label for="t-t-4">Ferry</label></li>
+          <li><input type="checkbox" id="t-t-5"><label for="t-t-5">Car</label></li>
+          <li><input type="checkbox" id="t-t-6"><label for="t-t-6">Autonomous pod</label></li>
+          <li><input type="checkbox" id="t-t-7"><label for="t-t-7">Walking</label></li>
+          <li><input type="checkbox" id="t-t-8"><label for="t-t-8">Accessibility hub</label></li>
+        </ul>
+      </div>
+      <div class="asset-group">
+        <h4>Physical</h4>
+        <ul>
+          <li><input type="checkbox" id="t-ph-1"><label for="t-ph-1">Trays / bowls for tokens</label></li>
+          <li><input type="checkbox" id="t-ph-2"><label for="t-ph-2">Pins and string</label></li>
+          <li><input type="checkbox" id="t-ph-3"><label for="t-ph-3">Pens</label></li>
+        </ul>
+      </div>
+      <div class="asset-group">
+        <h4>Wall / Debate</h4>
+        <ul>
+          <li><input type="checkbox" id="t-w-1"><label for="t-w-1">Portable whiteboard</label></li>
+          <li><input type="checkbox" id="t-w-2"><label for="t-w-2">Sticky notes / dot voting</label></li>
+          <li><input type="checkbox" id="t-w-3"><label for="t-w-3">Whiteboard markers</label></li>
+        </ul>
+      </div>
+      <div class="asset-group">
+        <h4>Screen</h4>
+        <ul>
+          <li><input type="checkbox" id="t-s-1"><label for="t-s-1">Title slide</label></li>
+          <li><input type="checkbox" id="t-s-2"><label for="t-s-2">Live prompt</label></li>
+          <li><input type="checkbox" id="t-s-3"><label for="t-s-3">Timer</label></li>
+          <li><input type="checkbox" id="t-s-4"><label for="t-s-4">Animated transport visual</label></li>
+        </ul>
+      </div>
+      <div class="asset-group">
+        <h4>Data Collection</h4>
+        <ul>
+          <li><input type="checkbox" id="t-d-1"><label for="t-d-1">Clear overlay sheets (6 — 2 maps × 3 sessions)</label></li>
+          <li><input type="checkbox" id="t-d-2"><label for="t-d-2">Dot stickers — 2 colours (priority + connection)</label></li>
+          <li><input type="checkbox" id="t-d-3"><label for="t-d-3">Transport Change Cards (~75 printed)</label></li>
+          <li><input type="checkbox" id="t-d-4"><label for="t-d-4">Labelled envelopes (3 — one per session)</label></li>
+          <li><input type="checkbox" id="t-d-5"><label for="t-d-5">Marker pens for acetate</label></li>
+        </ul>
+      </div>
+    </div>
+    <div class="asset-progress"><span class="progress-text">0 / 26 items ready</span><div class="asset-progress-bar"><div class="asset-progress-fill"></div></div></div>
+  </div>
+
+  <div class="asset-room room health">
+    <h3 style="color: var(--health);">Health & Wellbeing Room</h3>
+    <div class="asset-columns">
+      <div class="asset-group">
+        <h4>Printed</h4>
+        <ul>
+          <li><input type="checkbox" id="h-p-1"><label for="h-p-1">6x large wellbeing maps</label></li>
+          <li><input type="checkbox" id="h-p-2"><label for="h-p-2">2 per rotation (nature + community)</label></li>
+        </ul>
+      </div>
+      <div class="asset-group">
+        <h4>Cards / Tokens</h4>
+        <ul>
+          <li><input type="checkbox" id="h-c-1"><label for="h-c-1">Timeline cards</label></li>
+          <li><input type="checkbox" id="h-c-2"><label for="h-c-2">Investment / budget cards</label></li>
+          <li><input type="checkbox" id="h-c-3"><label for="h-c-3">Investment tokens / counters</label></li>
+          <li><input type="checkbox" id="h-c-4"><label for="h-c-4">Prompt cards (friction + opportunities)</label></li>
+        </ul>
+      </div>
+      <div class="asset-group">
+        <h4>Physical</h4>
+        <ul>
+          <li><input type="checkbox" id="h-ph-1"><label for="h-ph-1">Coloured stickers</label></li>
+          <li><input type="checkbox" id="h-ph-2"><label for="h-ph-2">Trays / envelopes for tokens</label></li>
+          <li><input type="checkbox" id="h-ph-3"><label for="h-ph-3">Pens</label></li>
+        </ul>
+      </div>
+      <div class="asset-group">
+        <h4>Wall / Debate</h4>
+        <ul>
+          <li><input type="checkbox" id="h-w-1"><label for="h-w-1">Portable whiteboard</label></li>
+          <li><input type="checkbox" id="h-w-2"><label for="h-w-2">Sticky notes / dot voting</label></li>
+          <li><input type="checkbox" id="h-w-3"><label for="h-w-3">Whiteboard markers</label></li>
+        </ul>
+      </div>
+      <div class="asset-group">
+        <h4>Screen</h4>
+        <ul>
+          <li><input type="checkbox" id="h-s-1"><label for="h-s-1">Title slide</label></li>
+          <li><input type="checkbox" id="h-s-2"><label for="h-s-2">Live prompt</label></li>
+          <li><input type="checkbox" id="h-s-3"><label for="h-s-3">Timer</label></li>
+          <li><input type="checkbox" id="h-s-4"><label for="h-s-4">Nature / public spaces visual loop</label></li>
+        </ul>
+      </div>
+      <div class="asset-group">
+        <h4>Data Collection</h4>
+        <ul>
+          <li><input type="checkbox" id="h-d-1"><label for="h-d-1">Clear overlay sheets (6 — 2 maps × 3 sessions)</label></li>
+          <li><input type="checkbox" id="h-d-2"><label for="h-d-2">Dot stickers — green (wellbeing) + red (friction)</label></li>
+          <li><input type="checkbox" id="h-d-3"><label for="h-d-3">Healthy Day Cards (~20 printed)</label></li>
+          <li><input type="checkbox" id="h-d-4"><label for="h-d-4">Token allocation tally sheets (6 copies)</label></li>
+          <li><input type="checkbox" id="h-d-5"><label for="h-d-5">Labelled envelopes (3 — one per session)</label></li>
+          <li><input type="checkbox" id="h-d-6"><label for="h-d-6">Marker pens for acetate</label></li>
+        </ul>
+      </div>
+    </div>
+    <div class="asset-progress"><span class="progress-text">0 / 22 items ready</span><div class="asset-progress-bar"><div class="asset-progress-fill"></div></div></div>
+  </div>
+
+  <div class="asset-room room night">
+    <h3 style="color: var(--night);">Night-Time Culture & Economy Room</h3>
+    <div class="asset-columns">
+      <div class="asset-group">
+        <h4>Printed</h4>
+        <ul>
+          <li><input type="checkbox" id="n-p-1"><label for="n-p-1">6x large night maps</label></li>
+          <li><input type="checkbox" id="n-p-2"><label for="n-p-2">Persona cards</label></li>
+          <li><input type="checkbox" id="n-p-3"><label for="n-p-3">Prompt cards (where, how, what, barriers, improvements)</label></li>
+          <li><input type="checkbox" id="n-p-4"><label for="n-p-4">Memory cards</label></li>
+          <li><input type="checkbox" id="n-p-5"><label for="n-p-5">Glow Map legend</label></li>
+          <li><input type="checkbox" id="n-p-6"><label for="n-p-6">Facilitator framing sheet</label></li>
+        </ul>
+      </div>
+      <div class="asset-group">
+        <h4>Physical</h4>
+        <ul>
+          <li><input type="checkbox" id="n-ph-1"><label for="n-ph-1">Glow stickers / colour-coded dots</label></li>
+          <li><input type="checkbox" id="n-ph-2"><label for="n-ph-2">Optional dark backing board</label></li>
+          <li><input type="checkbox" id="n-ph-3"><label for="n-ph-3">Trays for persona packs</label></li>
+          <li><input type="checkbox" id="n-ph-4"><label for="n-ph-4">Pens</label></li>
+        </ul>
+      </div>
+      <div class="asset-group">
+        <h4>Wall / Debate</h4>
+        <ul>
+          <li><input type="checkbox" id="n-w-1"><label for="n-w-1">Portable whiteboard</label></li>
+          <li><input type="checkbox" id="n-w-2"><label for="n-w-2">Sticky notes / dot voting</label></li>
+          <li><input type="checkbox" id="n-w-3"><label for="n-w-3">Whiteboard markers</label></li>
+        </ul>
+      </div>
+      <div class="asset-group">
+        <h4>Screen</h4>
+        <ul>
+          <li><input type="checkbox" id="n-s-1"><label for="n-s-1">Title slide</label></li>
+          <li><input type="checkbox" id="n-s-2"><label for="n-s-2">Live prompt</label></li>
+          <li><input type="checkbox" id="n-s-3"><label for="n-s-3">Timer</label></li>
+          <li><input type="checkbox" id="n-s-4"><label for="n-s-4">Newcastle at night visuals</label></li>
+        </ul>
+      </div>
+      <div class="asset-group">
+        <h4>Data Collection</h4>
+        <ul>
+          <li><input type="checkbox" id="n-d-1"><label for="n-d-1">Clear overlay sheets (3 — Glow Map × 3 sessions)</label></li>
+          <li><input type="checkbox" id="n-d-2"><label for="n-d-2">Glow stickers — green (best) + red (avoid) + yellow (potential)</label></li>
+          <li><input type="checkbox" id="n-d-3"><label for="n-d-3">Persona Night Experience Cards (~20 printed)</label></li>
+          <li><input type="checkbox" id="n-d-4"><label for="n-d-4">Memory Cards (~40 printed)</label></li>
+          <li><input type="checkbox" id="n-d-5"><label for="n-d-5">Labelled envelopes (3 — one per session)</label></li>
+          <li><input type="checkbox" id="n-d-6"><label for="n-d-6">Marker pens for acetate</label></li>
+        </ul>
+      </div>
+    </div>
+    <div class="asset-progress"><span class="progress-text">0 / 23 items ready</span><div class="asset-progress-bar"><div class="asset-progress-fill"></div></div></div>
+  </div>
+  </section>
+  </div>
+</div>
+
+</main>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
+<script>
+// ============================================================
+// FIREBASE CONFIG — Replace with your own Firebase project config
+//
+// To set up (free, ~2 minutes):
+// 1. Go to https://console.firebase.google.com
+// 2. Create a new project (any name, e.g. "tedxnewy-salon")
+// 3. In the project, go to Build > Realtime Database > Create Database
+// 4. Choose your region, start in TEST MODE
+// 5. Go to Project Settings > General > Your apps > Add web app
+// 6. Copy the firebaseConfig object and paste it below
+// ============================================================
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+  projectId: "YOUR_PROJECT",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+let db = null;
+let useFirebase = false;
+const statusEl = document.getElementById('fb-status');
+
+try {
+  if (firebaseConfig.apiKey !== 'YOUR_API_KEY') {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.database();
+    useFirebase = true;
+    statusEl.textContent = 'Connected — checklist syncs across all viewers';
+    statusEl.className = 'firebase-status connected';
+  } else {
+    statusEl.textContent = 'Local mode — add Firebase config to enable shared sync';
+    statusEl.className = 'firebase-status disconnected';
+  }
+} catch (e) {
+  statusEl.textContent = 'Local mode — Firebase connection failed';
+  statusEl.className = 'firebase-status disconnected';
+}
+
+// Fallback to localStorage when Firebase isn't configured
+function loadLocal() {
+  try { return JSON.parse(localStorage.getItem('tedxnewy-assets') || '{}'); } catch { return {}; }
+}
+function saveLocal(state) {
+  localStorage.setItem('tedxnewy-assets', JSON.stringify(state));
+}
+
+// Update progress bars for a given room
+function updateProgress(roomEl) {
+  const boxes = roomEl.querySelectorAll('input[type="checkbox"]');
+  const checked = roomEl.querySelectorAll('input[type="checkbox"]:checked').length;
+  const total = boxes.length;
+  const textEl = roomEl.querySelector('.progress-text');
+  const fillEl = roomEl.querySelector('.asset-progress-fill');
+  if (textEl) textEl.textContent = checked + ' / ' + total + ' items ready';
+  if (fillEl) fillEl.style.width = (total ? (checked / total * 100) : 0) + '%';
+}
+
+const allCheckboxes = document.querySelectorAll('.asset-group input[type="checkbox"]');
+
+if (useFirebase) {
+  // Listen for changes from Firebase and apply to checkboxes
+  const ref = db.ref('assets');
+  ref.on('value', snap => {
+    const state = snap.val() || {};
+    allCheckboxes.forEach(cb => {
+      cb.checked = !!state[cb.id];
+    });
+    document.querySelectorAll('.asset-room').forEach(updateProgress);
+  });
+
+  // On checkbox change, write to Firebase
+  allCheckboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      db.ref('assets/' + cb.id).set(cb.checked);
+    });
+  });
+} else {
+  // localStorage fallback
+  const state = loadLocal();
+  allCheckboxes.forEach(cb => {
+    cb.checked = !!state[cb.id];
+    cb.addEventListener('change', () => {
+      const s = loadLocal();
+      s[cb.id] = cb.checked;
+      saveLocal(s);
+      updateProgress(cb.closest('.asset-room'));
+    });
+  });
+  document.querySelectorAll('.asset-room').forEach(updateProgress);
+}
+
+// Section collapse/expand
+function toggleSection(el) {
+  const section = el.closest('.collapsible');
+  if (section) section.classList.toggle('collapsed');
+}
+
+// Expand/collapse all
+document.getElementById('expand-all').addEventListener('click', () => {
+  document.querySelectorAll('.collapsible').forEach(s => s.classList.remove('collapsed'));
+});
+document.getElementById('collapse-all').addEventListener('click', () => {
+  document.querySelectorAll('.collapsible').forEach(s => s.classList.add('collapsed'));
+});
+
+// Nav links expand their target section
+document.querySelectorAll('nav a[href^="#"]').forEach(a => {
+  a.addEventListener('click', () => {
+    const id = a.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
+    if (target && target.classList.contains('collapsed')) {
+      target.classList.remove('collapsed');
+    }
+  });
+});
+
+// Theme toggle
+const themeToggle = document.getElementById('theme-toggle');
+const themeKnob = document.getElementById('theme-knob');
+const html = document.documentElement;
+
+function setTheme(light) {
+  html.classList.toggle('light', light);
+  themeKnob.textContent = light ? '☀' : '☾';
+  localStorage.setItem('tedxnewy-theme', light ? 'light' : 'dark');
+}
+
+themeToggle.addEventListener('click', () => {
+  setTheme(!html.classList.contains('light'));
+});
+
+// Restore saved theme
+const savedTheme = localStorage.getItem('tedxnewy-theme');
+setTheme(savedTheme === 'light');
+
+// Data collection filters
+document.querySelectorAll('.data-filters').forEach(filterBar => {
+  const room = filterBar.closest('.data-room');
+  const buttons = filterBar.querySelectorAll('.data-filter-btn');
+  const items = room.querySelectorAll('.data-item');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      items.forEach(item => {
+        if (filter === 'all') {
+          item.classList.remove('hidden-by-filter');
+        } else {
+          const types = item.dataset.types || '';
+          item.classList.toggle('hidden-by-filter', !types.split(' ').includes(filter));
+        }
+      });
+    });
+  });
+});
+</script>
+
+</body>
+</html>
